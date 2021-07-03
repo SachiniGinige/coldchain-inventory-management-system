@@ -1,0 +1,87 @@
+.App{
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* content of page with sidebar */
+#sidebarMain {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  /* padding: 0px 10px; */
+  padding: 2% 5%;
+  padding-top: 100px;
+}
+
+.form{
+  margin: auto;
+  width: 80%;
+  min-width: 200px;
+}
+
+.form-check{
+  margin-left: 5%;
+}
+
+.form-control{
+  max-width: 900px;
+  height: 35px;
+}
+
+.btnContainer{
+  margin-right: 40px;
+}
+
+thead{
+  /* background-color: rgb(100, 130, 170); */
+  background-color: rgb(65, 70, 125);
+  color: white;
+}
+
+.table{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* .table-bordered{
+  border: 1px solid black;
+} */
+
+.table-responsive{
+  /* border: 1px solid black; */
+  /* padding: 5px; */
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+
+#bodyContainer{
+  position: relative;
+  min-height: 120vh;
+  flex-grow: 1;
+}
+
+#footerContainer{
+  position: relative;
+  bottom: 0;
+  width: 100%;  
+}
+
+.btn-floating{
+  border-radius: 50%;
+  align-items: center;
+  margin-right: 50px;
+}
+.btn-floating:hover{
+  /* background-color: rgb(10, 10, 50); */
+  background-color: rgb(62, 62, 110);
+  /* background-color: rgb(142, 142, 202); */
+}
+
+#footerIconSection{
+  display:flex;
+  justify-content: center;
+}
+.footerIcon{
+  height: 22px;
+  padding: 0 0 6px 0;
+  /* padding-bottom: 5px; */
+}
+

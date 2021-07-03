@@ -1,0 +1,77 @@
+/* sidebar - fixed full height */
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: rgb(10, 10, 50);
+    overflow-x: hidden;
+    /* padding-top: 16px; */
+    margin-top: 75px;
+}
+  
+/* sidebar links */
+.sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #a9aab1;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: block;
+    margin: 5px;
+}
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+.sidebar a:focus{
+    color:white;
+    font-weight: bold;
+}
+
+/* sidebar link icons */
+.sidebaricon{
+    /* padding-left: 10px; */
+    padding-right: 10px;
+    margin-bottom: 5px;
+    height: 20px;
+}
+
+/* sidebar link containers */
+.sidebarlinkcont{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.sidebarlinkcont:hover{
+    background-color: rgb(0, 0, 0,0.5);
+}
+.sidebarlinkcont:focus .sidebarlinkcont:visited{
+    background-color: rgb(0, 0, 0,0.5);
+}
+
+#sidebar-header{
+    padding: 8% 8% 0% 8%;
+    color: rgb(255, 255, 255);
+    /* color: rgb(226, 238, 253); */
+    font-family:monospace;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 17px;
+}
+.postscript{
+    text-align: right;
+    font-size:10px;  
+}
+  
+/* main content */
+/* .main {
+    margin-left: 200px; Same as the width of the sidenav
+    padding: 0px 10px;
+} */
+  
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}

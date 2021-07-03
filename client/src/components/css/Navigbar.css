@@ -1,0 +1,48 @@
+.Navigbar{
+    /* background-color: rgb(20, 20, 92); */
+    /* background-color: rgb(200, 200, 220); */
+    background-color: rgb(10, 10, 50,0.9);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+#NavigbarContent{
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#myAccountDropdown{
+    margin-right: 5%;
+    margin-left: 0;  
+    padding-left: 5px;  
+    color: rgb(255, 255, 255);
+}
+#myAccountIcon{
+    margin: 0;
+    height: 30px;
+}
+
+.navbar-light .navbar-nav .nav-link:any-link{
+    color: rgb(255, 255, 255);
+}
+/* .navbar-light .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+} */
+.navbar-light .navbar-nav .nav-link:hover{
+	color: rgba(140, 219, 255, 0.8);
+}
+.navbar-light .navbar-nav .nav-link:focus{
+    color: rgb(212, 240, 255);
+}
+
+.Navigbar-logo{
+    height: 50px;
+    max-height: 100px;
+}
+
+/* #myAccount{
+    color:rgb(212, 240, 255);
+} */

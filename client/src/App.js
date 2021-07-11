@@ -43,38 +43,38 @@ function App() {
         <Route path="/admin" component={NavigbarContent}/>
         <Route path= "/user" component={NavigbarContent}/>
         <div id="bodyContainer">
-        <Route path="/home/homepage" component={Homepage}/>
-        <Route path="/home/login-admin" component={AdminLoginPage}/>
-        <Route path="/home/login-user" component={UserLoginPage}/>
+        <Route path="/home" exact component={Homepage}/>
+        <Route path="/home/login-admin" exact component={AdminLoginPage}/>
+        <Route path="/home/login-user" exact component={UserLoginPage}/>
         <div id="sidebar-wrapper"> 
           <Route path="/admin" component={Sidebar}/>
           <Route path="/user" component={SidebarUser}/>
         </div>
         <div id="sidebarMain">
-          <Route path="/admin/equipment" component={ItemList}/>
-          <Route path="/admin/eqitem-add" component={AddItem}/> 
-          <Route path="/admin/eqitem-edit/:id" component={EditItem}/>
-          <Route path="/admin/eqtype" component={EqTypeList}/>
-          <Route path="/admin/eqtype" component={AddEqType}/> 
-          <Route path="/admin/model" component={ModelList}/> 
-          <Route path="/admin/model" component={AddModel}/>        
-          <Route path="/admin/locations" component={LocationList}/>
-          <Route path="/admin/location-add" component={AddLocation}/> 
-          <Route path="/admin/location-edit/:id" component={EditLocation}/>
-          <Route path="/admin/users" component={UserList}/>
-          <Route path="/admin/user-add" component={AddUser}/>
-          <Route path="/admin/user-edit/:id" component={EditUser}/>
-          <Route path="/admin/agents" component={AgentList}/>
-          <Route path="/admin/agent-add" component={AddAgent}/>
-          <Route path="/admin/agent-edit/:id" component={EditAgent}/>
+          <Route path="/admin/equipment" exact component={ItemList}/>
+          <Route path="/admin/eqitem-add" exact component={AddItem}/> 
+          <Route path="/admin/eqitem-edit/:id" exact component={EditItem}/>
+          <Route path="/admin/eqtype" exact component={EqTypeList}/>
+          <Route path="/admin/eqtype" exact component={AddEqType}/> 
+          <Route path="/admin/model" exact component={ModelList}/> 
+          <Route path="/admin/model" exact component={AddModel}/>        
+          <Route path="/admin/locations" exact component={LocationList}/>
+          <Route path="/admin/location-add" exact component={AddLocation}/> 
+          <Route path="/admin/location-edit/:id" exact component={EditLocation}/>
+          <Route path="/admin/users" exact component={UserList}/>
+          <Route path="/admin/user-add" exact component={AddUser}/>
+          <Route path="/admin/user-edit/:id" exact component={EditUser}/>
+          <Route path="/admin/agents" exact component={AgentList}/>
+          <Route path="/admin/agent-add" exact component={AddAgent}/>
+          <Route path="/admin/agent-edit/:id" exact component={EditAgent}/>
 
-          <Route path="/user/equipment" component={ItemListUser}/>
-          <Route path="/user/eqitem-edit/:id" component={EditItemUser}/>
-          <Route path="/user/eqtype" component={EqTypeListUser}/>
-          <Route path="/user/model" component={ModelListUser}/>
-          <Route path="/user/locations" component={LocationListUser}/>
-          <Route path="/user/users" component={UserListUser}/>
-          <Route path="/user/agents" component={AgentListUser}/>          
+          <Route path="/user/equipment" exact component={ItemListUser}/>
+          <Route path="/user/eqitem-edit/:id" exact component={EditItemUser}/>
+          <Route path="/user/eqtype" exact component={EqTypeListUser}/>
+          <Route path="/user/model" exact component={ModelListUser}/>
+          <Route path="/user/locations" exact component={LocationListUser}/>
+          <Route path="/user/users" exact component={UserListUser}/>
+          <Route path="/user/agents" exact component={AgentListUser}/>          
         </div> 
         </div>
         <Route path="/home" component={Footer}/>       

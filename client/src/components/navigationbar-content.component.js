@@ -22,7 +22,7 @@ export default class NavigbarContent extends Component{
     sessionStorage.removeItem(sessionStorage.getItem("username"));
     sessionStorage.removeItem("username");
     sessionStorage.setItem("loggedIn", false);   
-    window.location="../home/homepage";    
+    window.location="../home";    
   }
 
   render(){

@@ -7,6 +7,7 @@ import reqIcon from '../img/reqIcon.png';
 import forecastIcon from '../img/forecastIcon.png';
 
 import '../css/Sidebar.css' ;
+import { NavLink } from 'react-router-dom';
 
 function SidebarUser() {
     return (
@@ -16,39 +17,39 @@ function SidebarUser() {
                 <p className="postscript">Epidemiology Unit, Ministry of Health, Sri Lanka</p> 
             </div>  
             <div class="sidebarlinkcont">       
-                <a href="./home">
+                <NavLink to="./home">
                     <img src={homeIcon} className="sidebaricon" alt=""/> Home
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont">    
-                <a href="./equipment">
+                <NavLink to="./equipment">
                     <img src={equipIcon} className="sidebaricon" alt=""/> Equipment
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont"> 
-                <a href="./locations">
+                <NavLink to="./locations">
                     <img src={locationIcon} className="sidebaricon" alt=""/> Locations
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont"> 
-                <a href="./users">
+                <NavLink to="./users">
                     <img src={usersIcon} className="sidebaricon" alt=""/> Users
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont">       
-                <a href="./agents">
+                <NavLink to="./agents">
                     <img src={agentsIcon} className="sidebaricon" alt=""/> Supply Agents
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont">       
-                <a href="./requests">
+                <NavLink to="./requests">
                     <img src={reqIcon} className="sidebaricon" alt=""/> Requests
-                </a>
+                </NavLink>
             </div>
             <div class="sidebarlinkcont">       
-                <a href="./forecasts">
+                <NavLink to="./forecasts">
                     <img src={forecastIcon} className="sidebaricon" alt=""/> Forecast
-                </a>
+                </NavLink>
             </div>
         </div>
     );

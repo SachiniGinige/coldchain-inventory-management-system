@@ -7,18 +7,9 @@ import reqIcon from './img/reqIcon.png';
 import forecastIcon from './img/forecastIcon.png';
 
 import './css/Sidebar.css' ;
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
-    // const sidebarLinkFocused = (e) => {
-    //     if(sessionStorage.getItem("activeItem"))
-    //     {
-    //         sessionStorage.removeItem("activeItem");
-    //         // document.getElementById(sessionStorage.getItem("activeItem"));            
-    //     }
-        
-    //     sessionStorage.setItem("activeItem",e);
-    //     console.log(sessionStorage.getItem("activeItem"));
-    //   }
     return (
         <div className="sidebar">
             <div id="sidebar-header">
@@ -26,39 +17,39 @@ function Sidebar() {
                 <p className="postscript">Epidemiology Unit, Ministry of Health, Sri Lanka</p> 
             </div>   
             <div className="sidebarlinkcont" id="homeLink">       
-                <a href="./home" id="homelink">
+                <NavLink to="./home" id="homelink">
                     <img src={homeIcon} className="sidebaricon" alt=""/> Home
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont" id="equipmentLink">    
-                <a href="./equipment" id="equipmentLink">
+                <NavLink to="./equipment" id="equipmentLink">
                     <img src={equipIcon} className="sidebaricon" alt=""/> Equipment
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont"> 
-                <a href="./locations">
+                <NavLink to="./locations">
                     <img src={locationIcon} className="sidebaricon" alt=""/> Locations
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont"> 
-                <a href="./users">
+                <NavLink to="./users">
                     <img src={usersIcon} className="sidebaricon" alt=""/> Users
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont">       
-                <a href="./agents">
+                <NavLink to="./agents">
                     <img src={agentsIcon} className="sidebaricon" alt=""/> Supply Agents
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont">       
-                <a href="./requests">
+                <NavLink to="./requests">
                     <img src={reqIcon} className="sidebaricon" alt=""/> Requests
-                </a>
+                </NavLink>
             </div>
             <div className="sidebarlinkcont">       
-                <a href="./forecasts">
+                <NavLink to="./forecasts">
                     <img src={forecastIcon} className="sidebaricon" alt=""/> Forecast
-                </a>
+                </NavLink>
             </div>
         </div>
     );

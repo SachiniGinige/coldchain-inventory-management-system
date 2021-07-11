@@ -28,6 +28,7 @@
 .sidebar a:focus{
     color:white;
     font-weight: bold;
+    font-variant: small-caps;
 }
 
 /* sidebar link icons */

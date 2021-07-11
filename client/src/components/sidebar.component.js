@@ -9,9 +9,16 @@ import forecastIcon from './img/forecastIcon.png';
 import './css/Sidebar.css' ;
 
 function Sidebar() {
-    const sidebarLinkFocused = (e) => {
+    // const sidebarLinkFocused = (e) => {
+    //     if(sessionStorage.getItem("activeItem"))
+    //     {
+    //         sessionStorage.removeItem("activeItem");
+    //         // document.getElementById(sessionStorage.getItem("activeItem"));            
+    //     }
         
-      }
+    //     sessionStorage.setItem("activeItem",e);
+    //     console.log(sessionStorage.getItem("activeItem"));
+    //   }
     return (
         <div className="sidebar">
             <div id="sidebar-header">
@@ -19,12 +26,12 @@ function Sidebar() {
                 <p className="postscript">Epidemiology Unit, Ministry of Health, Sri Lanka</p> 
             </div>   
             <div className="sidebarlinkcont" id="homeLink">       
-                <a href="./home" onClick={sidebarLinkFocused(this)}>
+                <a href="./home" id="homelink">
                     <img src={homeIcon} className="sidebaricon" alt=""/> Home
                 </a>
             </div>
-            <div className="sidebarlinkcont">    
-                <a href="./equipment">
+            <div className="sidebarlinkcont" id="equipmentLink">    
+                <a href="./equipment" id="equipmentLink">
                     <img src={equipIcon} className="sidebaricon" alt=""/> Equipment
                 </a>
             </div>

@@ -22,7 +22,15 @@ export default class AddUser extends Component{
             username: '',
             password: '',
             location: '',
-            locations: []
+            locations: [],
+
+            nameErr: '',
+            designationErr: '',
+            emailErr: '',
+            contactNoErr: '',
+            usernameErr: '',
+            passwordErr: '',
+            errorMsg:''
         }
     }
 
@@ -42,37 +50,37 @@ export default class AddUser extends Component{
         this.setState({
             name: e.target.value
         });
-        if(!e.target.value){
-            console.log("Required field")
-        }
-        else if(!e.target.value.match(/^[a-zA-Z]+$/)){
-            console.log("Invalid Name: "+e.target.value);
-        }
+        this.validateName(e.target.value);
     }
     onChangeDesignation(e){
         this.setState({
             designation: e.target.value
         });
+        this.validateDesignation(e.target.value);
     }
     onChangeEmail(e){
         this.setState({
             email: e.target.value
         });
+        this.validateEmail(e.target.value);
     }
     onChangeContactNo(e){
         this.setState({
             contactNo: e.target.value
         });
+        this.validateContactNo(e.target.value);
     }
     onChangeUsername(e){
         this.setState({
             username: e.target.value
         });
+        this.validateUsername(e.target.value);
     }
     onChangePassword(e){
         this.setState({
             password: e.target.value
         });
+        this.validatePassword(e.target.value);
     }
     onChangeLocation(e){
         this.setState({
@@ -80,26 +88,187 @@ export default class AddUser extends Component{
         });
     }
 
+    validateName(val){
+        if(!val){
+            this.setState({
+                nameErr: '*Required field'
+            });
+            return false;
+        }
+        else if(!val.match(/^[a-zA-Z]+$/)){
+            this.setState({
+                nameErr: '*Invalid format for Name'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                nameErr: ''
+            });
+            return true;
+        }
+    }
+    
+    validateDesignation(val){
+        if(!val){
+            this.setState({
+                designationErr: '*Required field'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                designationErr: ''
+            });
+            return true;
+        }
+    }
+
+    validateEmail(val){
+        if(!val){
+            this.setState({
+                emailErr: '*Required field'
+            });
+            return false;
+        }
+        else if(!val.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+            this.setState({
+                emailErr: '*Enter a valid email address'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                emailErr: ''
+            });
+            return true;
+        }
+    }
+    validateContactNo(val){
+        if(!val){
+            this.setState({
+                contactNoErr: '*Required field'
+            });
+            return false;
+        }
+        else if((!val.match(/^[0-9]{10}$/))){
+            this.setState({
+                contactNoErr: '*Enter a valid telephone number. Must contain 10 digits'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                contactNoErr: ''
+            });
+            return true;
+        }
+    }
+    validateUsername(val){
+        if(!val){
+            this.setState({
+                usernameErr: 'Required field'
+            });
+            return false;
+        }
+        else if((!val.match(/^[a-zA-Z0-9]{4,}$/))){
+            this.setState({
+                usernameErr: '*Must contain at least 4 characters'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                usernameErr: ''
+            });
+            return true;
+        }
+    }
+    validatePassword(val){
+        if(!val){
+            this.setState({
+                passwordErr: '*Required field'
+            });
+            return false;
+        }
+        else if((!val.match(/^.{6,}$/))){
+            this.setState({
+                passwordErr: '*Must contain at least 6 characters'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                passwordErr: ''
+            });
+            return true;
+        }
+    }
+
+
+
+    validateForm(){
+        // if(((this.state.nameErr)||(this.state.designationErr)||(this.state.emailErr)||(this.state.contactNoErr)||
+        // (this.state.nameErr)||(this.state.usernameErr)||(this.state.passwordErr))||((!this.state.name))){
+        //     console.log("Please check form input");
+        //     return false;
+        // }
+
+        this.validateName(this.state.name);
+        this.validateDesignation(this.state.designation);
+        this.validateEmail(this.state.email);
+        this.validateContactNo(this.state.contactNo);
+        this.validateUsername(this.state.username);
+        this.validatePassword(this.state.password);
+        if((this.validateName(this.state.name)&&this.validateDesignation(this.state.designation)&&this.validateEmail(this.state.email)&&this.validateContactNo(this.state.contactNo)
+                    &&this.validateUsername(this.state.username)&&this.validatePassword(this.state.password))===false){
+            // this.setState({
+            //     errorMsg: 'Please check form input'
+            // });
+            alert('Please check form input');
+            return false;
+        } 
+        this.setState({
+            errorMsg: ''
+        });
+        return true;
+    }
+
     onSubmit(e){
         e.preventDefault();
 
-        const user = {
-            name:  this.state.name,
-            designation: this.state.designation,
-            email:  this.state.email,
-            contactNo:  this.state.contactNo,
-            username:  this.state.username,
-            password:  this.state.password,
-            location:  this.state.location
-        }
+        const isValid = this.validateForm();
 
-        console.log(user);
+        if(isValid){
+            const user = {
+                name:  this.state.name,
+                designation: this.state.designation,
+                email:  this.state.email,
+                contactNo:  this.state.contactNo,
+                username:  this.state.username,
+                password:  this.state.password,
+                location:  this.state.location
+            }
 
-        axios.post('http://localhost:3001/users/add', user)
-            .then(res => console.log(res.data));
-        
-        alert("User added");        
-        window.location = './users';    
+            console.log(user);
+
+            axios.post('http://localhost:3001/users/add', user)
+                .then(res => console.log(res.data));
+            
+            alert("User added");        
+            //clear form  
+            this.setState({
+                name: '',
+                designation: '',
+                email: '',
+                contactNo: '',
+                username: '',
+                password: '',
+                location: '',
+                locations: []
+            }) 
+            // window.location = './users';
+        } 
     }
 
     render() {
@@ -109,8 +278,9 @@ export default class AddUser extends Component{
                 <h3>Add New User</h3><br/>
                 
                 <label className="form-label">Name: </label>
-                <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} />
-                <br/>
+                <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName}/>
+                <span class="formError">{this.state.nameErr}</span><br/>
+                
                 
                 <label className="form-label">Designation: </label>
                 <div className="form-check">
@@ -149,21 +319,25 @@ export default class AddUser extends Component{
                     <label className="form-check-label" for="designation3">
                         Medical Officer of Health
                     </label>
-                    <br/><br/>
-                </div>
+                    <br/>{this.state.designationErr? (<span class="formError">{this.state.designationErr}</span>) : null} <br/>                    
+                </div>                
                 
                 <label className="form-label">Email: </label>
                 <input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail} />
-                <br/>
+                <span class="formError">{this.state.emailErr}</span><br/>
+
                 <label className="form-label">Contact Number: </label>
                 <input type="text" className="form-control" value={this.state.contactNo} onChange={this.onChangeContactNo} />
-                <br/>
+                <span class="formError">{this.state.contactNoErr}</span><br/>
+
                 <label className="form-label">Username: </label>
                 <input type="text" className="form-control" value={this.state.username} onChange={this.onChangeUsername} />
-                <br/>
+                <span class="formError">{this.state.usernameErr}</span><br/>
+
                 <label className="form-label">Password: </label>
                 <input type="password" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
-                <br/>
+                <span class="formError">{this.state.passwordErr}</span><br/>
+
                 <label className="form-label">Location: </label>
                 <select className="form-control" value={this.state.location} onChange={this.onChangeLocation}>
                             {
@@ -173,13 +347,12 @@ export default class AddUser extends Component{
                                     </option>;
                                 })
                             }
-                </select>
+                </select><br/>
 
-                <br/>
+                <span class="formError">{this.state.errorMsg}</span><br/><br/>
 
                 <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Add User</button>
-                <br/><br/><br/>
-                
+                <br/><br/><br/>                
             </div>
         );
     }

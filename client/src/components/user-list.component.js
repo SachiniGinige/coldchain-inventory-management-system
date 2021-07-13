@@ -25,8 +25,12 @@ export default class UserList extends Component{
         super(props);
 
         this.deleteUser = this.deleteUser.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { users: [] };
+        this.state = { 
+            users: [],
+            searchTerm: '' 
+        };
     }
 
     componentDidMount(){
@@ -40,6 +44,11 @@ export default class UserList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
+    }
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
     }
 
     deleteUser(id) {
@@ -55,7 +64,17 @@ export default class UserList extends Component{
     }
     
     userList() {
-        return this.state.users.map( currentuser => {
+        return this.state.users.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.designation.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentuser => {
             return <User user={currentuser} deleteUser={this.deleteUser} key={currentuser.id}/>
         })
     }
@@ -63,7 +82,10 @@ export default class UserList extends Component{
     render() {
         return(
             <div className="UserList">
-                <h3>Users</h3><br/>
+                <h3>Users</h3>
+                <div className="searchbarContainer" >
+                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                </div>
                 <div className="table-responsive">
                     {/* table of all users */}
                     <Table className="table table-striped table-bordered table-hover">

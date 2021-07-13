@@ -25,8 +25,12 @@ export default class AgentList extends Component{
         super(props);
 
         this.deleteAgent = this.deleteAgent.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { agents: [] };
+        this.state = { 
+            agents: [] ,
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -39,6 +43,11 @@ export default class AgentList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
+    }
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
     }
 
     deleteAgent(id) {
@@ -54,7 +63,13 @@ export default class AgentList extends Component{
     }
     
     agentList() {
-        return this.state.agents.map( currentagent => {
+        return this.state.agents.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentagent => {
             return <Agent agent={currentagent} deleteAgent={this.deleteAgent} key={currentagent.id}/>
         })
     }
@@ -62,7 +77,10 @@ export default class AgentList extends Component{
     render() {
         return(
             <div className="AgentList">
-                <h3>Agents</h3><br/>
+                <h3>Agents</h3>
+                <div className="searchbarContainer" >
+                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
                         <thead>

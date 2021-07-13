@@ -27,8 +27,12 @@ export default class LocationList extends Component{
         super(props);
 
         this.deleteLocation = this.deleteLocation.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { locations: [] };
+        this.state = { 
+            locations: [],
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -41,6 +45,12 @@ export default class LocationList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
+    }
+
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
     }
 
     deleteLocation(id) {
@@ -56,7 +66,13 @@ export default class LocationList extends Component{
     }
     
     locationList() {
-        return this.state.locations.map( currentlocation => {
+        return this.state.locations.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentlocation => {
             return <Location location={currentlocation} deleteLocation={this.deleteLocation} key={currentlocation.id}/>
         })
     }
@@ -64,7 +80,10 @@ export default class LocationList extends Component{
     render() {
         return(
             <div className="LocationList">
-                <h3>Locations</h3><br/>
+                <h3>Locations</h3>
+                <div className="searchbarContainer" >
+                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
                         <thead>

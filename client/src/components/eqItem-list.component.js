@@ -30,8 +30,15 @@ export default class ItemList extends Component{
         super(props);
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
         
-        this.state = { items: [] };
+        this.state = { 
+            items: [] ,
+            location: '',
+            locations: [],
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -44,7 +51,27 @@ export default class ItemList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
+        // axios.get('http://localhost:3001/locations/get/')
+        //     .then(response => {
+        //         if (response.data.length > 0){
+        //             this.setState({
+        //                 locations: response.data.map(location=> location),
+        //                 location: 'Select location'
+        //             })
+        //         }
+        //     })
     }
+
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
+    }
+    // onChangeLocation(e){
+    //     this.setState({
+    //         location: e.target.value
+    //     });
+    // }
 
     deleteItem(id) {
 
@@ -58,7 +85,23 @@ export default class ItemList extends Component{
     }
     
     itemList() {
-        return this.state.items.map( currentitem => {
+        return this.state.items.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.equipment.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.model.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.supplyAgent.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.itemId==(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.productionYear==(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentitem => {
             return <Item item={currentitem} deleteItem={this.deleteItem} key={currentitem.id}/>
         })
     }
@@ -66,7 +109,20 @@ export default class ItemList extends Component{
     render() {
         return(
             <div className="ItemList">
-                <h3>Equipment Items</h3><br/>
+                <h3>Equipment Items</h3>
+                <div className="searchbarContainer" >
+                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                    {/* <label className="form-label searchbar">Location: </label>
+                    <select className="form-control searchbar" value={this.state.location} onChange={this.onChangeLocation}>
+                                {
+                                    this.state.locations.map(function(location) {
+                                        return <option value={location.name}>
+                                            {location.name}
+                                        </option>;
+                                    })
+                                }
+                    </select><br/> */}
+                </div>
                 <div className="table-responsive">
                     {/* table of all equipment items */}
                     <Table className="table table-sm table-striped table-bordered table-hover">

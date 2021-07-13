@@ -122,88 +122,90 @@ export default class AddLocation extends Component{
 
     render() {
         return(
-            // create location form
-            <div className="form" id="addLocationForm">
-                <h3>Add New Location</h3><br/>
-                
-                <label className="form-label">Name: </label>
-                <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} placeholder="eg: Colombo"/>
-                <br/>                 
-                <label className="form-label">Location Level: </label>
-                <div className="form-check">
-                    <input 
-                        className="form-check-input" 
-                        type="radio" 
-                        id="level1" 
-                        value="Central" 
-                        checked={this.state.level === "Central"}
-                        onChange={this.onChangeLevel}
-                    />
-                    <label className="form-check-label" for="level1">
-                        Central Level
-                    </label>
-                    <br/>
-                    <input 
-                        className="form-check-input" 
-                        type="radio" 
-                        id="level2" 
-                        value="District" 
-                        checked={this.state.level === "District"}
-                        onChange={this.onChangeLevel}
-                    />
-                    <label className="form-check-label" for="level2">
-                        District Level
-                    </label>
-                    <br/>
-                    <input 
-                        className="form-check-input" 
-                        type="radio" 
-                        id="level3" 
-                        value="Divisional" 
-                        checked={this.state.level === "Divisional"}
-                        onChange={this.onChangeLevel}
-                    />
-                    <label className="form-check-label" for="level3">
-                        Divisional Level
-                    </label>
-                    <br/><br/>
-                </div>  
+            <div>
+                {/* // create location form */}
+                <div className="form" id="addLocationForm">
+                    <h3>Add New Location</h3><br/>
+                    
+                    <label className="form-label">Name: </label>
+                    <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} placeholder="eg: Colombo"/>
+                    <br/>                 
+                    <label className="form-label">Location Level: </label>
+                    <div className="form-check">
+                        <input 
+                            className="form-check-input" 
+                            type="radio" 
+                            id="level1" 
+                            value="Central" 
+                            checked={this.state.level === "Central"}
+                            onChange={this.onChangeLevel}
+                        />
+                        <label className="form-check-label" for="level1">
+                            Central Level
+                        </label>
+                        <br/>
+                        <input 
+                            className="form-check-input" 
+                            type="radio" 
+                            id="level2" 
+                            value="District" 
+                            checked={this.state.level === "District"}
+                            onChange={this.onChangeLevel}
+                        />
+                        <label className="form-check-label" for="level2">
+                            District Level
+                        </label>
+                        <br/>
+                        <input 
+                            className="form-check-input" 
+                            type="radio" 
+                            id="level3" 
+                            value="Divisional" 
+                            checked={this.state.level === "Divisional"}
+                            onChange={this.onChangeLevel}
+                        />
+                        <label className="form-check-label" for="level3">
+                            Divisional Level
+                        </label>
+                        <br/><br/>
+                    </div>  
 
-                {this.state.level==="Divisional"? 
-                    (<div><label className="form-label">District: </label>
-                    <select className="form-control" value={this.state.district} onChange={this.onChangeDistrict}>
-                            {
-                                this.state.districts.map(function(district) {
-                                    return <option value={district.locationId}>
-                                        {district.name}
-                                    </option>;
-                                })
-                            }
-                </select><br/></div>) 
-                    : null}
+                    {this.state.level==="Divisional"? 
+                        (<div><label className="form-label">District: </label>
+                        <select className="form-control" value={this.state.district} onChange={this.onChangeDistrict}>
+                                {
+                                    this.state.districts.map(function(district) {
+                                        return <option value={district.locationId}>
+                                            {district.name}
+                                        </option>;
+                                    })
+                                }
+                    </select><br/></div>) 
+                        : null}
 
-                <label className="form-label">Address: </label>
-                <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} />
-                <br/>                             
-                <label className="form-label">Contact Person: </label>
-                <input type="email" className="form-control" value={this.state.contactPerson} onChange={this.onChangeContactPerson} />
-                <br/>
-                <label className="form-label">Contact Number 1: </label>
-                <input type="text" className="form-control" value={this.state.contactNo1} onChange={this.onChangeContactNo1} />
-                <br/>
-                <label className="form-label">Contact Number 2: </label>
-                <input type="text" className="form-control" value={this.state.contactNo2} onChange={this.onChangeContactNo2} />
-                <br/>
-                <label className="form-label">Status: </label>
-                <select className="form-control" value={this.state.status} onChange={this.onChangeStatus} >
-                    <option value="functional">functional</option>
-                    <option value="temporarily non-functional">temporarily non-functional</option>
-                    <option value="terminated">terminated</option>
-                </select>
-                <br/>
-                
-                <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Add Location</button>
-                <br/><br/><br/>    
+                    <label className="form-label">Address: </label>
+                    <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} />
+                    <br/>                             
+                    <label className="form-label">Contact Person: </label>
+                    <input type="email" className="form-control" value={this.state.contactPerson} onChange={this.onChangeContactPerson} />
+                    <br/>
+                    <label className="form-label">Contact Number 1: </label>
+                    <input type="text" className="form-control" value={this.state.contactNo1} onChange={this.onChangeContactNo1} />
+                    <br/>
+                    <label className="form-label">Contact Number 2: </label>
+                    <input type="text" className="form-control" value={this.state.contactNo2} onChange={this.onChangeContactNo2} />
+                    <br/>
+                    <label className="form-label">Status: </label>
+                    <select className="form-control" value={this.state.status} onChange={this.onChangeStatus} >
+                        <option value="functional">functional</option>
+                        <option value="temporarily non-functional">temporarily non-functional</option>
+                        <option value="terminated">terminated</option>
+                    </select>
+                    <br/>
+                    
+                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Add Location</button>
+                    <br/><br/><br/>    
+                </div>
             </div>
         );
     }

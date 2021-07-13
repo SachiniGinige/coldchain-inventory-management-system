@@ -678,6 +678,25 @@ app.put("/locations/update/:id", (req, res)=>{
     });
 });
 
+//divisional Locations
+app.post("/divisional-locations/add", (req, res) => {
+
+    const name = req.body.name;
+    const district = req.body.district;
+
+    const sqlInsert =  "INSERT INTO coldchain_db.divisional_location (locationId,district) VALUES ((SELECT locationId from coldchain_db.location where name = ?), ?);";
+    
+    db.query(sqlInsert,[name, district], (err, result)=>{
+        if(!err){
+            console.log(result)
+            res.json("Successfully added under ID: " + result.insertId);
+        }
+        else{
+            res.json(err);
+        }
+    });    
+});
+
 //Agents (Supply and Maintenance)
 app.post("/agents/add", (req, res) => {
 

@@ -7,6 +7,7 @@ export default class AddLocation extends Component{
 
         this.onChangeName=this.onChangeName.bind(this);
         this.onChangeLevel=this.onChangeLevel.bind(this);
+        this.onChangeDistrict=this.onChangeDistrict.bind(this);
         this.onChangeAddress=this.onChangeAddress.bind(this);
         this.onChangeContactPerson=this.onChangeContactPerson.bind(this);
         this.onChangeContactNo1=this.onChangeContactNo1.bind(this);
@@ -22,8 +23,23 @@ export default class AddLocation extends Component{
             contactNo1: '',
             contactNo2: '',
             status: 'functional',
-            suffix: ''
+            suffix: '',
+
+            district: '',
+            districts: []
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:3001/locations/get-districts/')
+            .then(response => {
+                if (response.data.length > 0){
+                    this.setState({
+                        districts: response.data.map(district=> district),
+                        district: response.data[0].locationId
+                    })
+                }
+            })
     }
 
     onChangeName(e){
@@ -36,7 +52,14 @@ export default class AddLocation extends Component{
             level: e.target.value
         });
         if(e.target.value==="District"){this.setState({suffix:' RMSD'});}
-        else if(e.target.value==="Divisional"){this.setState({suffix:' MOH Office'});}
+        else if(e.target.value==="Divisional"){
+            this.setState({suffix:' MOH Office'});
+        }
+    }
+    onChangeDistrict(e){
+        this.setState({
+            address: e.target.value
+        });
     }
     onChangeAddress(e){
         this.setState({
@@ -77,13 +100,23 @@ export default class AddLocation extends Component{
             contactNo2:  this.state.contactNo2,
             status:  this.state.status
         }
-
-        console.log(location);
+        // console.log(location);
 
         axios.post('http://localhost:3001/locations/add', location)
             .then(res => console.log(res.data));
+
+        alert("Location added"); 
+
+        if(this.state.level==="Divisional"){
+            const divisionalLocation = {
+                name:  this.state.name+this.state.suffix,
+                district:  this.state.district
+            }
+            axios.post('http://localhost:3001/divisional-locations/add', divisionalLocation)
+                .then(res => console.log(res.data));
+        }
         
-        alert("Location added");        
+               
         window.location = './locations';    
     }
 
@@ -134,7 +167,21 @@ export default class AddLocation extends Component{
                         Divisional Level
                     </label>
                     <br/><br/>
-                </div>     
+                </div>  
+
+                {this.state.level==="Divisional"? 
+                    (<div><label className="form-label">District: </label>
+                    <select className="form-control" value={this.state.district} onChange={this.onChangeDistrict}>
+                            {
+                                this.state.districts.map(function(district) {
+                                    return <option value={district.locationId}>
+                                        {district.name}
+                                    </option>;
+                                })
+                            }
+                </select><br/></div>) 
+                    : null}
+
                 <label className="form-label">Address: </label>
                 <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} />
                 <br/>                             

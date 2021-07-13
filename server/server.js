@@ -593,7 +593,18 @@ app.get("/locations/get", (req, res) => {
     
     db.query(sqlSelect, (err,result)=>{
            if(!err) {
-                // console.log(result)
+                res.json(result);}
+            else{
+                res.json(err);
+            }        
+    })
+});
+
+app.get("/locations/get-districts", (req, res) => {
+    const sqlSelect = "SELECT * FROM coldchain_db.location where level=?;";
+    
+    db.query(sqlSelect, "District", (err,result)=>{
+           if(!err) {
                 res.json(result);}
             else{
                 res.json(err);

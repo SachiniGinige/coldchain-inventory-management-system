@@ -30,7 +30,7 @@ export default class AddUser extends Component{
             contactNoErr: '',
             usernameErr: '',
             passwordErr: '',
-            errorMsg:''
+            // errorMsg:''
         }
     }
 
@@ -151,7 +151,7 @@ export default class AddUser extends Component{
             });
             return false;
         }
-        else if((!val.match(/^[0-9]{10}$/))){
+        else if(!((val.match(/^[0-9]{10}$/))||(val.match(/^\+[0-9]{11}$/)))){
             this.setState({
                 contactNoErr: '*Enter a valid telephone number. Must contain 10 digits'
             });
@@ -167,7 +167,7 @@ export default class AddUser extends Component{
     validateUsername(val){
         if(!val){
             this.setState({
-                usernameErr: 'Required field'
+                usernameErr: '*Required field'
             });
             return false;
         }
@@ -228,9 +228,9 @@ export default class AddUser extends Component{
             alert('Please check form input');
             return false;
         } 
-        this.setState({
-            errorMsg: ''
-        });
+        // this.setState({
+        //     errorMsg: ''
+        // });
         return true;
     }
 
@@ -255,7 +255,8 @@ export default class AddUser extends Component{
             axios.post('http://localhost:3001/users/add', user)
                 .then(res => console.log(res.data));
             
-            alert("User added");        
+            alert("User added");   
+                 
             //clear form  
             this.setState({
                 name: '',

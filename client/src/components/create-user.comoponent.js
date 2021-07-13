@@ -280,7 +280,7 @@ export default class AddUser extends Component{
                 
                 <label className="form-label">Name: </label>
                 <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName}/>
-                <span class="formError">{this.state.nameErr}</span><br/>
+                {this.state.nameErr ? (<div class="formError">{this.state.nameErr}</div>) : null} <br/>
                 
                 
                 <label className="form-label">Designation: </label>
@@ -320,24 +320,24 @@ export default class AddUser extends Component{
                     <label className="form-check-label" for="designation3">
                         Medical Officer of Health
                     </label>
-                    <br/>{this.state.designationErr? (<span class="formError">{this.state.designationErr}</span>) : null} <br/>                    
+                    <br/>{this.state.designationErr? (<div class="formError">{this.state.designationErr}</div>) : null} <br/>                    
                 </div>                
                 
                 <label className="form-label">Email: </label>
                 <input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail} />
-                <span class="formError">{this.state.emailErr}</span><br/>
+                <div class="formError">{this.state.emailErr}</div> <br/>
 
                 <label className="form-label">Contact Number: </label>
                 <input type="text" className="form-control" value={this.state.contactNo} onChange={this.onChangeContactNo} />
-                <span class="formError">{this.state.contactNoErr}</span><br/>
+                <div class="formError">{this.state.contactNoErr}</div><br/>
 
                 <label className="form-label">Username: </label>
                 <input type="text" className="form-control" value={this.state.username} onChange={this.onChangeUsername} />
-                <span class="formError">{this.state.usernameErr}</span><br/>
+                <div class="formError">{this.state.usernameErr}</div><br/>
 
                 <label className="form-label">Password: </label>
                 <input type="password" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
-                <span class="formError">{this.state.passwordErr}</span><br/>
+                <div class="formError">{this.state.passwordErr}</div><br/>
 
                 <label className="form-label">Location: </label>
                 <select className="form-control" value={this.state.location} onChange={this.onChangeLocation}>
@@ -350,7 +350,7 @@ export default class AddUser extends Component{
                             }
                 </select><br/>
 
-                <span class="formError">{this.state.errorMsg}</span><br/><br/>
+                <div class="formError">{this.state.errorMsg}</div><br/><br/>
 
                 <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Add User</button>
                 <br/><br/><br/>                

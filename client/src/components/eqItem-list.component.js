@@ -31,12 +31,14 @@ export default class ItemList extends Component{
 
         this.deleteItem = this.deleteItem.bind(this);
         this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
-        // this.onChangeLocation = this.onChangeLocation.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
+        this.onChangeFunctionalStatus = this.onChangeFunctionalStatus.bind(this);
         
         this.state = { 
             items: [] ,
             location: '',
             locations: [],
+            status: '',
             searchTerm: ''
         };
     }
@@ -51,15 +53,19 @@ export default class ItemList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
-        // axios.get('http://localhost:3001/locations/get/')
-        //     .then(response => {
-        //         if (response.data.length > 0){
-        //             this.setState({
-        //                 locations: response.data.map(location=> location),
-        //                 location: 'Select location'
-        //             })
-        //         }
-        //     })
+        axios.get('http://localhost:3001/locations/get/')
+            .then(response => {
+                if (response.data.length > 0){
+                    this.setState({
+                        locations: response.data.map(location=> location),
+                        location: 'Not Selected'
+                    })
+                }
+            })
+        
+        // this.setState({
+        //     locations: this.state.locations.concat({name:'Not Selected'})
+        // })
     }
 
     onChangeSearchTerm(e){
@@ -67,12 +73,16 @@ export default class ItemList extends Component{
             searchTerm: e.target.value
         });
     }
-    // onChangeLocation(e){
-    //     this.setState({
-    //         location: e.target.value
-    //     });
-    // }
-
+    onChangeLocation(e){
+        this.setState({
+            location: e.target.value
+        });
+    }
+    onChangeFunctionalStatus(e){
+        this.setState({
+            status: e.target.value
+        });
+    }
     deleteItem(id) {
 
         alert("Are you sure you want to delete Item No. "+id+"?");
@@ -86,20 +96,34 @@ export default class ItemList extends Component{
     
     itemList() {
         return this.state.items.filter((val)=>{
-            if(this.state.searchTerm==='')
-                {return val;}
-            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.equipment.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.model.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.supplyAgent.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.itemId==(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.productionYear==(this.state.searchTerm.toLowerCase()))
-                {return val;}
+           if(this.state.searchTerm===''){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }}
+            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }}
+            else if(val.equipment.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }}
+            else if(val.model.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }}
+            else if(val.supplyAgent.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }} // eslint-disable-next-line
+            else if(val.itemId==(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }} // eslint-disable-next-line
+            else if(val.productionYear==(this.state.searchTerm.toLowerCase())){
+                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                        {return val; }}           
             return null;
         }).map( currentitem => {
             return <Item item={currentitem} deleteItem={this.deleteItem} key={currentitem.id}/>
@@ -112,7 +136,7 @@ export default class ItemList extends Component{
                 <h3>Equipment Items</h3>
                 <div className="searchbarContainer" >
                     <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
-                    {/* <label className="form-label searchbar">Location: </label>
+                    <label className="form-label searchbar">Location: </label>
                     <select className="form-control searchbar" value={this.state.location} onChange={this.onChangeLocation}>
                                 {
                                     this.state.locations.map(function(location) {
@@ -121,7 +145,19 @@ export default class ItemList extends Component{
                                         </option>;
                                     })
                                 }
-                    </select><br/> */}
+                    </select><br/>
+                    <label className="form-label searchbar">Functional Status: </label>
+                    <select className="form-control searchbar" onChange={this.onChangeFunctionalStatus}>
+                        <option value="Not Selected">
+                            Not Selected
+                        </option>
+                        <option value="functional">
+                            functional
+                        </option>
+                        <option value="non-functional">
+                            non-functional
+                        </option>
+                    </select><br/>
                 </div>
                 <div className="table-responsive">
                     {/* table of all equipment items */}

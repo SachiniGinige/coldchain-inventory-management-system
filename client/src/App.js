@@ -33,6 +33,7 @@ import UserListUser from "./components/user-components/user-list.component";
 import AgentListUser from "./components/user-components/agent-list.component";
 import NavigbarContent from "./components/navigationbar-content.component";
 import Footer from "./components/footer.component";
+import MaintenaceRequestList from "./components/reqMaintenace-list.component";
 // import Example from "./components/modal.component";
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="/admin/agents" exact component={AgentList}/>
           <Route path="/admin/agent-add" exact component={AddAgent}/>
           <Route path="/admin/agent-edit/:id" exact component={EditAgent}/>
+          <Route path="/admin/reqmaintenance" exact component={MaintenaceRequestList}/>
 
           <Route path="/user/equipment" exact component={ItemListUser}/>
           <Route path="/user/eqitem-edit/:id" exact component={EditItemUser}/>

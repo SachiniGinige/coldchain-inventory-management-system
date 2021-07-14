@@ -334,7 +334,7 @@ app.get("/eqitems/getbyuser-table/:id", (req, res) => {
 // app.get("/eqitems/get-search/:val", (req, res) => {
 //     const val=req.params.val;
 
-//     const sqlSelect = "SELECT * FROM coldchain_db.equipment_item WHERE (SELECT locationId FROM location where name = ?) ORDER BY itemId";
+//     const sqlSelect = "SELECT * FROM coldchain_db.equipment_item WHERE (SELECT locationId FROM location where name = ?) ORDER BY itemId;";
 
 //     db.query(sqlSelect, val, (err,result)=>{
 //            if(!err) {
@@ -795,6 +795,44 @@ app.put("/agents/update/:id", (req, res)=>{
             res.json(err);
         }
     });
+});
+
+//Requests
+//Maintenance requests
+app.post("/reqmaintenance/add", (req, res) => {
+
+    const date = req.body.date;
+    const status = req.body.status;
+    const description = req.body.description;
+    const itemId = req.body.itemId;
+    const sender= req.body.sender;
+    const receiver= req.body.receiver;
+
+    console.log(req.body.name)
+
+    const sqlInsert =  "INSERT INTO maintenance_request (date,status,description,itemId,senderId,receiverId) VALUES (?, ?, ?, ?, ?, ?);";
+    
+    db.query(sqlInsert,[date, status, description, itemId, sender, receiver], (err, result)=>{
+        if(!err){
+            console.log(result)
+            res.json("Successfully added under ID: " + result.insertId);
+        }
+        else{
+            res.json(err);
+        }
+    });    
+});
+
+app.get("/reqmaintenance/get", (req, res) => {
+    const sqlSelect = "SELECT * FROM coldchain_db.maintenance_request;";
+    
+    db.query(sqlSelect, (err,result)=>{
+           if(!err) {
+                res.json(result);}
+            else{
+                res.json(err);
+            }        
+    })
 });
 
 

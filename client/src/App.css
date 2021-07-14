@@ -91,4 +91,14 @@ thead{
   font-size: 14px;
 }
 
+.searchbar{
+  width:300px;
+  margin-left: auto;
+  margin-right: 0;
+}
+.searchbarContainer{
+  /* text-align: right; */
+  padding: 0px 5px 5px 0px;
+  
+}
 

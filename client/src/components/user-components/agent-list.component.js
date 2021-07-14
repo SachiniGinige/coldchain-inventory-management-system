@@ -18,8 +18,13 @@ export default class AgentListUser extends Component{
     
     constructor(props){
         super(props);
+
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { agents: [] };
+        this.state = { 
+            agents: [] ,
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -33,9 +38,21 @@ export default class AgentListUser extends Component{
                 console.log(error);
             })
     }
+
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
+    }
     
     agentList() {
-        return this.state.agents.map( currentagent => {
+        return this.state.agents.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentagent => {
             return <Agent agent={currentagent} key={currentagent.id}/>
         })
     }
@@ -43,7 +60,10 @@ export default class AgentListUser extends Component{
     render() {
         return(
             <div className="AgentList">
-                <h3>Agents</h3><br/>
+                <h3>Agents</h3>
+                <div className="searchbarContainer" >
+                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-hover table-bordered">
                         <thead>

@@ -31,7 +31,7 @@ export default class ItemList extends Component{
 
         this.deleteItem = this.deleteItem.bind(this);
         this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
-        this.onChangeLocation = this.onChangeLocation.bind(this);
+        // this.onChangeLocation = this.onChangeLocation.bind(this);
         
         this.state = { 
             items: [] ,

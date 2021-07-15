@@ -79,7 +79,6 @@ export default class ItemList extends Component{
         });
     }
     deleteItem(id) {
-
         alert("Are you sure you want to delete Item No. "+id+"?");
         axios.delete(`http://localhost:3001/eqitems/delete/${id}`)
             .then(res => console.log(res.data));
@@ -129,33 +128,49 @@ export default class ItemList extends Component{
         return(
             <div className="ItemList">
                 <h3>Equipment Items</h3>
-                <div className="searchbarContainer" >
-                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
-                    <label className="form-label searchbar" htmlFor="filter1">Location: </label>
-                    <select className="form-control searchbar" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
-                                {
-                                    this.state.locations.map(function(location) {
-                                        return <option value={location.name}>
-                                            {location.name}
-                                        </option>;
-                                    })
-                                }
-                        <option value="Not Selected">
-                            Not Selected
-                        </option>
-                    </select>
-                    <label className="form-label searchbar" htmlFor="filter2">Functional Status: </label>
-                    <select className="form-control searchbar" id="filter2" value={this.state.status} onChange={this.onChangeFunctionalStatus}>
-                        <option value="functional">
-                            functional
-                        </option>
-                        <option value="non-functional">
-                            non-functional
-                        </option>
-                        <option value="Not Selected">
-                            Not Selected
-                        </option>
-                    </select><br/>
+                <div className=" container searchbarContainer">
+                    <div className="row">
+                        <div className="col searchbarCol">
+                            {/* <br/> */}
+                        </div>
+                        <div className="col-md-auto searchbarCol">
+                            <div className="filterDiv">
+                                <label className="form-label searchbar filter-label" htmlFor="filter1" >LOCATION </label>
+                                <select className="searchbar filter-select" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
+                                            {
+                                                this.state.locations.map(function(location) {
+                                                    return <option value={location.name}>
+                                                        {location.name}
+                                                    </option>;
+                                                })
+                                            }
+                                    <option value="Not Selected">
+                                        - - - - - - - - - - - - - 
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-md-auto searchbarCol">
+                            <div className="filterDiv">
+                                <label className="form-label searchbar filter-label" htmlFor="filter2">Functional Status </label>
+                                <select className="searchbar filter-select" id="filter2" value={this.state.status} onChange={this.onChangeFunctionalStatus}>
+                                    <option value="functional">
+                                        functional
+                                    </option>
+                                    <option value="non-functional">
+                                        non-functional
+                                    </option>
+                                    <option value="Not Selected">
+                                        - - - - - - - - - - - - -
+                                    </option>
+                                </select><br/>
+                            </div>
+                        </div>
+                        <div className="col-md-auto searchbarCol">
+                            <br/>
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..." style={{height:44}}/><br/>
+                        </div>
+                    </div>
                 </div>
                 <div className="table-responsive">
                     {/* table of all equipment items */}

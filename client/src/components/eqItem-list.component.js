@@ -129,14 +129,11 @@ export default class ItemList extends Component{
             <div className="ItemList">
                 <h3>Equipment Items</h3>
                 <div className=" container searchbarContainer">
-                    <div className="row">
-                        <div className="col searchbarCol">
-                            {/* <br/> */}
-                        </div>
+                    <div className="row">                        
                         <div className="col-md-auto searchbarCol">
                             <div className="filterDiv">
-                                <label className="form-label searchbar filter-label" htmlFor="filter1" >LOCATION </label>
-                                <select className="searchbar filter-select" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
+                                <label className="form-label filter-label" htmlFor="filter1" >LOCATION </label>
+                                <select className="filter-select" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
                                             {
                                                 this.state.locations.map(function(location) {
                                                     return <option value={location.name}>
@@ -152,8 +149,8 @@ export default class ItemList extends Component{
                         </div>
                         <div className="col-md-auto searchbarCol">
                             <div className="filterDiv">
-                                <label className="form-label searchbar filter-label" htmlFor="filter2">Functional Status </label>
-                                <select className="searchbar filter-select" id="filter2" value={this.state.status} onChange={this.onChangeFunctionalStatus}>
+                                <label className="form-label filter-label" htmlFor="filter2">Functional Status </label>
+                                <select className="filter-select" id="filter2" value={this.state.status} onChange={this.onChangeFunctionalStatus}>
                                     <option value="functional">
                                         functional
                                     </option>
@@ -166,9 +163,10 @@ export default class ItemList extends Component{
                                 </select><br/>
                             </div>
                         </div>
+                        <div className="col searchbarCol"></div>
                         <div className="col-md-auto searchbarCol">
                             <br/>
-                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..." style={{height:44}}/><br/>
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
                         </div>
                     </div>
                 </div>

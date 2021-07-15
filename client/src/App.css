@@ -94,16 +94,11 @@ thead{
 .searchbarContainer{
   padding: 20px 0px 20px 0px;
 }
-.filterDiv{
-  margin-left: auto;
-  margin-right: 0; 
-  /* border: 2px solid black; */
-}
 .searchbar{
-  width:220px;
+  width:250px;
   font-size: 14px;
   font-weight: 500;
-  padding-top: 0;
+  height: 44px;
 }
 .filterDiv {
   margin-top: 24px;
@@ -115,6 +110,7 @@ thead{
   position:relative;
 }
 .filter-label{
+  width:220px;
   font-size: 9px;
   text-transform: uppercase;
   font-weight: bold;
@@ -126,7 +122,9 @@ thead{
 .filter-select{
   background-color: #fff;
   border:0px;
+  width:220px;
   height:42px;
   font-size: 14px;
+  font-weight: 500;
   padding: 5px 10px;
 }

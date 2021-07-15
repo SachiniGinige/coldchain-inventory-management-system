@@ -36,9 +36,9 @@ export default class ItemList extends Component{
         
         this.state = { 
             items: [] ,
-            location: '',
+            location: 'Not Selected',
             locations: [],
-            status: '',
+            status: 'Not Selected',
             searchTerm: ''
         };
     }
@@ -58,14 +58,9 @@ export default class ItemList extends Component{
                 if (response.data.length > 0){
                     this.setState({
                         locations: response.data.map(location=> location),
-                        location: 'Not Selected'
                     })
                 }
             })
-        
-        // this.setState({
-        //     locations: this.state.locations.concat({name:'Not Selected'})
-        // })
     }
 
     onChangeSearchTerm(e){
@@ -136,8 +131,8 @@ export default class ItemList extends Component{
                 <h3>Equipment Items</h3>
                 <div className="searchbarContainer" >
                     <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
-                    <label className="form-label searchbar">Location: </label>
-                    <select className="form-control searchbar" value={this.state.location} onChange={this.onChangeLocation}>
+                    <label className="form-label searchbar" htmlFor="filter1">Location: </label>
+                    <select className="form-control searchbar" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
                                 {
                                     this.state.locations.map(function(location) {
                                         return <option value={location.name}>
@@ -145,17 +140,20 @@ export default class ItemList extends Component{
                                         </option>;
                                     })
                                 }
-                    </select><br/>
-                    <label className="form-label searchbar">Functional Status: </label>
-                    <select className="form-control searchbar" onChange={this.onChangeFunctionalStatus}>
                         <option value="Not Selected">
                             Not Selected
                         </option>
+                    </select>
+                    <label className="form-label searchbar" htmlFor="filter2">Functional Status: </label>
+                    <select className="form-control searchbar" id="filter2" value={this.state.status} onChange={this.onChangeFunctionalStatus}>
                         <option value="functional">
                             functional
                         </option>
                         <option value="non-functional">
                             non-functional
+                        </option>
+                        <option value="Not Selected">
+                            Not Selected
                         </option>
                     </select><br/>
                 </div>

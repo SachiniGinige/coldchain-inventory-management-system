@@ -36,9 +36,9 @@ export default class ItemList extends Component{
         
         this.state = { 
             items: [] ,
-            location: 'Not Selected',
+            location: '',
             locations: [],
-            status: 'Not Selected',
+            status: '',
             searchTerm: ''
         };
     }
@@ -91,32 +91,32 @@ export default class ItemList extends Component{
     itemList() {
         return this.state.items.filter((val)=>{
            if(this.state.searchTerm===''){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }}
             else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }}
             else if(val.equipment.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }}
             else if(val.model.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }}
             else if(val.supplyAgent.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }} // eslint-disable-next-line
             else if(val.itemId==(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }} // eslint-disable-next-line
             else if(val.productionYear==(this.state.searchTerm.toLowerCase())){
-                if((val.location===this.state.location)||(this.state.location==='Not Selected'))
-                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status==='Not Selected'))
+                if((val.location===this.state.location)||(this.state.location===''))
+                    if((val.currentFunctionalStatus===this.state.status)||(this.state.status===''))
                         {return val; }}           
             return null;
         }).map( currentitem => {
@@ -144,7 +144,7 @@ export default class ItemList extends Component{
                                                     </option>;
                                                 })
                                             }
-                                    <option value="Not Selected">
+                                    <option value="">
                                         - - - - - - - - - - - - - 
                                     </option>
                                 </select>
@@ -160,7 +160,7 @@ export default class ItemList extends Component{
                                     <option value="non-functional">
                                         non-functional
                                     </option>
-                                    <option value="Not Selected">
+                                    <option value="">
                                         - - - - - - - - - - - - -
                                     </option>
                                 </select><br/>

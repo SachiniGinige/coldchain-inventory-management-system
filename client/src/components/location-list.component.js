@@ -71,6 +71,12 @@ export default class LocationList extends Component{
                 {return val;}
             else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                 {return val;}
+            else if(val.address.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.contactPerson.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.status.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
             return null;
         }).map( currentlocation => {
             return <Location location={currentlocation} deleteLocation={this.deleteLocation} key={currentlocation.id}/>
@@ -82,7 +88,12 @@ export default class LocationList extends Component{
             <div className="LocationList">
                 <h3>Locations</h3>
                 <div className="searchbarContainer" >
-                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                    <div className="row">
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">

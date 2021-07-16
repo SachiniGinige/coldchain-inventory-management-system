@@ -20,8 +20,13 @@ export default class LocationListUser extends Component{
     
     constructor(props){
         super(props);
+
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { locations: [] };
+        this.state = { 
+            locations: [] ,
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -35,9 +40,27 @@ export default class LocationListUser extends Component{
                 console.log(error);
             })
     }
+
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
+    }
     
     locationList() {
-        return this.state.locations.map( currentlocation => {
+        return this.state.locations.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.address.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.contactPerson.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.status.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            return null;
+        }).map( currentlocation => {
             return <Location location={currentlocation} key={currentlocation.id}/>
         })
     }
@@ -45,7 +68,15 @@ export default class LocationListUser extends Component{
     render() {
         return(
             <div className="LocationList">
-                <h3>Locations</h3><br/>
+                <h3>Locations</h3>
+                <div className="searchbarContainer" >
+                    <div className="row">
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
+                </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
                         <thead>

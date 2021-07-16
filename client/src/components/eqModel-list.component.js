@@ -23,8 +23,12 @@ export default class ModelList extends Component{
         super(props);
 
         this.deleteModel = this.deleteModel.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { eqmodels: [] };
+        this.state = { 
+            eqmodels: [] ,
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -40,6 +44,12 @@ export default class ModelList extends Component{
             })
     }
 
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
+    }
+
     deleteModel(id) {
 
         alert("Are you sure you want to delete Model No. "+id+"?");
@@ -53,7 +63,17 @@ export default class ModelList extends Component{
     }
     
     modelList() {
-        return this.state.eqmodels.map( currenteqmodel => {
+        return this.state.eqmodels.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}                        
+            else if(val.model.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.eqtype.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;} 
+            else if(val.agent.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;} 
+            return null;
+        }).map( currenteqmodel => {
             return <Model eqmodel={currenteqmodel} deleteModel={this.deleteModel} key={currenteqmodel.id}/>
         })
     }
@@ -61,7 +81,15 @@ export default class ModelList extends Component{
     render() {
         return(
             <div className="ModelList">
-                <h3>Equipment Models</h3><br/>
+                <h3>Equipment Models</h3>
+                <div className="searchbarContainer" >
+                    <div className="row">
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
+                </div>
                 <div className="table-responsive">
                     {/* table of all equipment models */}
                     <Table className="table table-striped table-bordered table-hover">

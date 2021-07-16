@@ -21,8 +21,12 @@ export default class EqTypeList extends Component{
         super(props);
 
         this.deleteEqType = this.deleteEqType.bind(this);
+        this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
         
-        this.state = { types: [] };
+        this.state = { 
+            types: [] ,
+            searchTerm: ''
+        };
     }
 
     componentDidMount(){
@@ -36,6 +40,11 @@ export default class EqTypeList extends Component{
             .catch((error) =>{
                 console.log(error);
             })
+    }
+    onChangeSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value
+        });
     }
 
     deleteEqType(id) {
@@ -51,7 +60,13 @@ export default class EqTypeList extends Component{
     }
     
     eqTypeList() {
-        return this.state.types.map( currenttype => {
+        return this.state.types.filter((val)=>{
+            if(this.state.searchTerm==='')
+                {return val;}                        
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;} 
+            return null;
+        }).map( currenttype => {
             return <EqType type={currenttype} deleteEqType={this.deleteEqType} key={currenttype.id}/>
         })
     }
@@ -59,7 +74,15 @@ export default class EqTypeList extends Component{
     render() {
         return(
             <div className="EqTypeList">
-                <h3>Equipment Types</h3><br/>
+                <h3>Equipment Types</h3>
+                <div className="searchbarContainer" >
+                    <div className="row">
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
+                </div>
                 <div className="table-responsive">
                     {/* table of all equipment types */}
                     <Table className="table table-striped table-bordered table-hover">

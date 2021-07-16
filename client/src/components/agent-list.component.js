@@ -79,7 +79,12 @@ export default class AgentList extends Component{
             <div className="AgentList">
                 <h3>Agents</h3>
                 <div className="searchbarContainer" >
-                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                    <div className="row">
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">

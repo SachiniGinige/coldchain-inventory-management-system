@@ -26,9 +26,11 @@ export default class UserList extends Component{
 
         this.deleteUser = this.deleteUser.bind(this);
         this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
+        this.onChangeDesignation = this.onChangeDesignation.bind(this);
         
         this.state = { 
             users: [],
+            designation: '',
             searchTerm: '' 
         };
     }
@@ -50,6 +52,11 @@ export default class UserList extends Component{
             searchTerm: e.target.value
         });
     }
+    onChangeDesignation(e){
+        this.setState({
+            designation: e.target.value
+        });
+    }
 
     deleteUser(id) {
 
@@ -65,14 +72,21 @@ export default class UserList extends Component{
     
     userList() {
         return this.state.users.filter((val)=>{
-            if(this.state.searchTerm==='')
-                {return val;}
-            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.designation.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
+            if(this.state.searchTerm===''){
+                if((val.designation===this.state.designation)||(this.state.designation===''))
+                    {return val; }}
+            else if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.designation===this.state.designation)||(this.state.designation===''))
+                    {return val; }}
+            else if(val.designation.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.designation===this.state.designation)||(this.state.designation===''))
+                    {return val; }}
+            else if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase())){
+                if((val.designation===this.state.designation)||(this.state.designation===''))
+                    {return val; }} // eslint-disable-next-line
+            else if(val.userId==(this.state.searchTerm)){
+                if((val.designation===this.state.designation)||(this.state.designation===''))
+                    {return val; }}
             return null;
         }).map( currentuser => {
             return <User user={currentuser} deleteUser={this.deleteUser} key={currentuser.id}/>
@@ -84,7 +98,32 @@ export default class UserList extends Component{
             <div className="UserList">
                 <h3>Users</h3>
                 <div className="searchbarContainer" >
-                    <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                    <div className="row">
+                        <div className="col-md-auto searchbarCol">
+                            <div className="filterDiv">
+                                <label className="form-label filter-label" htmlFor="filter1">Designation </label>
+                                <select className="filter-select" id="filter1" value={this.state.designation} onChange={this.onChangeDesignation}>
+                                    <option value="Epidemiologist">
+                                        Epidemiologist  
+                                    </option>
+                                    <option value="RE">
+                                        RE
+                                    </option>
+                                    <option value="MOH">
+                                        MOH
+                                    </option>
+                                    <option value="">
+                                        - - - - - - - - - - - - -
+                                    </option>
+                                </select><br/>
+                            </div>
+                        </div>
+                        <div className="col searchbarCol"></div>
+                        <div className="col-md-auto searchbarCol">
+                            <br/>
+                            <input type="text" className="form-control searchbar" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search..."/><br/>
+                        </div>
+                    </div>
                 </div>
                 <div className="table-responsive">
                     {/* table of all users */}

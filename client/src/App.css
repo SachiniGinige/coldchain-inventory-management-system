@@ -128,3 +128,10 @@ thead{
   font-weight: 500;
   padding: 5px 10px;
 }
+
+.select2{
+  margin-right: 50px;
+}
+.select2-search{
+  margin-top: 30px;
+}

@@ -34,6 +34,8 @@ import AgentListUser from "./components/user-components/agent-list.component";
 import NavigbarContent from "./components/navigationbar-content.component";
 import Footer from "./components/footer.component";
 import MaintenaceRequestList from "./components/reqMaintenace-list.component";
+import AddMaintenaceRequest from "./components/user-components/create-reqMaintenance.comoponent";
+import MaintenaceRequestListUser from "./components/user-components/reqMaintenace-list.component";
 // import Example from "./components/modal.component";
 
 function App() {
@@ -41,8 +43,7 @@ function App() {
     <div className="App">
       <Router>               
         <Route path="/home" component={Navigbar}/>
-        <Route path="/admin" component={NavigbarContent}/>
-        <Route path= "/user" component={NavigbarContent}/>
+        <Route path={["/admin", "/user"]} component={NavigbarContent}/>
         <div id="bodyContainer">
         <Route path="/home" exact component={Homepage}/>
         <Route path="/home/login-admin" exact component={AdminLoginPage}/>
@@ -69,6 +70,7 @@ function App() {
           <Route path="/admin/agent-add" exact component={AddAgent}/>
           <Route path="/admin/agent-edit/:id" exact component={EditAgent}/>
           <Route path="/admin/reqmaintenance" exact component={MaintenaceRequestList}/>
+          
 
           <Route path="/user/equipment" exact component={ItemListUser}/>
           <Route path="/user/eqitem-edit/:id" exact component={EditItemUser}/>
@@ -76,7 +78,9 @@ function App() {
           <Route path="/user/model" exact component={ModelListUser}/>
           <Route path="/user/locations" exact component={LocationListUser}/>
           <Route path="/user/users" exact component={UserListUser}/>
-          <Route path="/user/agents" exact component={AgentListUser}/>          
+          <Route path="/user/agents" exact component={AgentListUser}/>
+          <Route path="/user/reqmaintenance" exact component={MaintenaceRequestListUser}/>
+          <Route path="/user/reqmaintenance-add" exact component={AddMaintenaceRequest}/>          
         </div> 
         </div>
         <Route path="/home" component={Footer}/>       

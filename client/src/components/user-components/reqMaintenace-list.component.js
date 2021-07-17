@@ -15,7 +15,7 @@ const Request = props => (
     </tr>
 )
 
-export default class MaintenaceRequestList extends Component{
+export default class MaintenaceRequestListUser extends Component{
     
     constructor(props){
         super(props);
@@ -95,8 +95,8 @@ export default class MaintenaceRequestList extends Component{
                         </tbody>
                     </Table>
                 </div>    
-                {/* <br/><br/><br/>
-                <a className="btn btn-outline-primary" href="./reqmaintenance-add"> Add Maintenance Request</a> */}
+                <br/><br/><br/>
+                <a className="btn btn-outline-primary" href="./reqmaintenance-add"> Add Maintenance Request</a>
             </div>
         );
     }

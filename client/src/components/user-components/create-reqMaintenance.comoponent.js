@@ -219,7 +219,7 @@ export default class AddMaintenaceRequest extends Component{
                 <label className="form-label">Item ID: </label>
                 <input type="text" className="form-control" required value={this.state.itemId} onChange={this.onChangeItem} />
                 <div class="formError">{this.state.itemErr}</div><br/>
-                <div className="row">
+                <div className="row formRow">
                     <div className="col">
                         <label className="form-label">Equipment ID: </label>
                         <input type="text" className="form-control" disabled value={this.state.itemEq} /><br/>
@@ -242,7 +242,7 @@ export default class AddMaintenaceRequest extends Component{
                 <input type="textarea" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
                 <div class="formError">{this.state.descriptionErr}</div><br/>                                 
 
-                <div className="row">
+                <div className="row formRow">
                     <div className="col">
                         <label className="form-label">TO (Receiver): </label><br/>
                         <select className="form-control select2" value={this.state.receiver} onChange={this.onChangeReceiver}>

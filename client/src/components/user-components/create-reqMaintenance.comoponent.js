@@ -33,8 +33,11 @@ export default class AddMaintenaceRequest extends Component{
             .then(response => {
                 if (response.data.length > 0){
                     this.setState({
-                        users: response.data.map(user=> user),
-                        sender: response.data[0].userId,
+                        users: response.data.filter((val)=>{                       
+                            if(!(val.designation==="MOH"))
+                                {return val;} 
+                            return null;
+                        }).map(user=> user),
                         receiver: response.data[0].userId
                     })
                 }

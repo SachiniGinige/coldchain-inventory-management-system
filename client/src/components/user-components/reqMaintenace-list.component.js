@@ -49,16 +49,16 @@ export default class MaintenaceRequestListUser extends Component{
         return this.state.requests.filter((val)=>{
             if(this.state.searchTerm==='')
                 {return val;}                        
-            else if(val.date.includes(this.state.searchTerm))
+            if(val.date.includes(this.state.searchTerm))
                 {return val;} // eslint-disable-next-line
-            else if(val.requestId==(this.state.searchTerm))
+            if(val.requestId==(this.state.searchTerm))
                 {return val;} // eslint-disable-next-line
-            else if(val.itemId==(this.state.searchTerm))
+            if(val.itemId==(this.state.searchTerm))
                     {return val;}
-            // else if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            //     {return val;}
-            // else if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            //     {return val;} 
+            if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;} 
             return null;
         }).map( currentrequest => {
             return <Request request={currentrequest} deleteRequest={this.deleteRequest} key={currentrequest.id}/>

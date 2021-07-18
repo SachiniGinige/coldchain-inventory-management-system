@@ -6,12 +6,12 @@ import Table from 'react-bootstrap/Table';
 const Request = props => (
     <tr>
         <td>{props.request.requestId}</td>
-        <td>{props.request.date}</td>
+        <td>{new Date(props.request.date).toLocaleString('en',{ timeZone: 'Asia/Colombo' })}</td>
         <td>{props.request.status}</td>
         <td>{props.request.description}</td>
         <td>{props.request.itemId}</td>
-        <td>{props.request.senderId}</td>
-        <td>{props.request.receiverId}</td>
+        <td>{props.request.sender}</td>
+        <td>{props.request.receiver}</td>
     </tr>
 )
 
@@ -29,7 +29,7 @@ export default class MaintenaceRequestList extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3001/reqmaintenance/get/')
+        axios.get('http://localhost:3001/reqmaintenance/get-table/')
             .then(response => {
                 this.setState({
                     requests: response.data
@@ -55,10 +55,10 @@ export default class MaintenaceRequestList extends Component{
                 {return val;} // eslint-disable-next-line
             else if(val.itemId==(this.state.searchTerm))
                     {return val;}
-            // else if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            //     {return val;}
-            // else if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            //     {return val;} 
+            else if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;}
+            else if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                {return val;} 
             return null;
         }).map( currentrequest => {
             return <Request request={currentrequest} deleteRequest={this.deleteRequest} key={currentrequest.id}/>

@@ -37,7 +37,6 @@ export default class UserList extends Component{
 
     componentDidMount(){
         axios.get('http://localhost:3001/users/get-table/')
-        // axios.get('http://localhost:8080/users/')
             .then(response => {
                 this.setState({
                     users: response.data

@@ -18,6 +18,9 @@ export default class AddMaintenaceRequest extends Component{
             description: '',
             receiver: '',
             users: [] ,
+            itemEq: '' ,
+            itemModel: '',
+            itemLoc: '' ,
             searchTerm: '',
 
             itemErr: '',
@@ -49,6 +52,27 @@ export default class AddMaintenaceRequest extends Component{
             itemId: e.target.value
         });
         this.validateItem(e.target.value);
+        
+        axios.get(`http://localhost:3001/eqitems/get/${e.target.value}`)
+        .then(response => { 
+            // console.log(this.props.match);
+            // console.log(response);    
+            if(response.data===""){
+                this.setState({
+                    itemEq: '',
+                    itemModel: '',
+                    itemLoc: '',                
+                }) 
+            }
+            else{
+                this.setState({
+                    itemEq: response.data.equipmentId,
+                    itemModel: response.data.modelId,
+                    itemLoc: response.data.locationId,                
+                }) 
+            }  
+        })
+            
     }
     onChangeStatus(e){
         this.setState({
@@ -195,7 +219,21 @@ export default class AddMaintenaceRequest extends Component{
                 <label className="form-label">Item ID: </label>
                 <input type="text" className="form-control" required value={this.state.itemId} onChange={this.onChangeItem} />
                 <div class="formError">{this.state.itemErr}</div><br/>
-                
+                <div className="row">
+                    <div className="col">
+                        <label className="form-label">Equipment ID: </label>
+                        <input type="text" className="form-control" disabled value={this.state.itemEq} /><br/>
+                    </div>
+                    <div className="col">
+                        <label className="form-label">Model ID: </label>
+                        <input type="text" className="form-control" disabled value={this.state.itemModel} /><br/>
+                    </div>
+                    <div className="col">
+                        <label className="form-label">Location ID: </label>
+                        <input type="text" className="form-control" disabled value={this.state.itemLoc} /><br/>
+                    </div>
+                </div>
+
                 <label className="form-label">Status: </label>
                 <input type="text" className="form-control" value={this.state.status} onChange={this.onChangeStatus}/>
                 {this.state.statusErr ? (<div class="formError">{this.state.statusErr}</div>) : null} <br/>
@@ -206,29 +244,29 @@ export default class AddMaintenaceRequest extends Component{
 
                 <div className="row">
                     <div className="col">
-                <label className="form-label">TO (Receiver): </label><br/>
-                <select className="form-control select2" value={this.state.receiver} onChange={this.onChangeReceiver}>
-                            {
-                                this.state.users.filter((val)=>{
-                                    if(this.state.searchTerm==='')
-                                        {return val;}                        
-                                    if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                                        {return val;} 
-                                    if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                                        {return val;} 
-                                    return null;
-                                }).map(function(user) {
-                                    return <option value={user.userId}>
-                                        {user.name}
-                                        - {user.location}
-                                    </option>;
-                                })
-                            }                            
-                </select><br/>
-                <div class="formError">{this.state.receiverErr}</div><br/>
+                        <label className="form-label">TO (Receiver): </label><br/>
+                        <select className="form-control select2" value={this.state.receiver} onChange={this.onChangeReceiver}>
+                                    {
+                                        this.state.users.filter((val)=>{
+                                            if(this.state.searchTerm==='')
+                                                {return val;}                        
+                                            if(val.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                                                {return val;} 
+                                            if(val.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                                                {return val;} 
+                                            return null;
+                                        }).map(function(user) {
+                                            return <option value={user.userId}>
+                                                {user.name}
+                                                - {user.location}
+                                            </option>;
+                                        })
+                                    }                            
+                        </select><br/>
+                        <div class="formError">{this.state.receiverErr}</div><br/>
                     </div>
                     <div className="col">
-                <input type="text" className="form-control select2-search" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search Users by Name/Location..."/><br/>               
+                        <input type="text" className="form-control select2-search" value={this.state.searchTerm} onChange={this.onChangeSearchTerm} placeholder="Search Users by Name/Location..."/><br/>               
                     </div>
                 </div>
 

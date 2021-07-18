@@ -836,7 +836,7 @@ app.get("/reqmaintenance/get", (req, res) => {
 });
 
 app.get("/reqmaintenance/get-table", (req, res) => {
-    const sqlSelect = "SELECT r.requestId, r.date, r.status, r.description, r.itemId, u.name as sender, us.name as receiver FROM coldchain_db.maintenance_request as r LEFT JOIN coldchain_db.user as u ON (r.senderId=u.userId) LEFT JOIN coldchain_db.user as us ON (r.receiverId=us.userId);";
+    const sqlSelect = "SELECT r.requestId, r.date, r.status, r.description, r.itemId, u.name as sender, us.name as receiver FROM coldchain_db.maintenance_request as r LEFT JOIN coldchain_db.user as u ON (r.senderId=u.userId) LEFT JOIN coldchain_db.user as us ON (r.receiverId=us.userId) ORDER BY date desc;";
     
     db.query(sqlSelect, (err,result)=>{
            if(!err) {

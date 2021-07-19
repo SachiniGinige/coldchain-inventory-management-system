@@ -21,6 +21,7 @@ export default class NavigbarContent extends Component{
 
     sessionStorage.removeItem(sessionStorage.getItem("username"));
     sessionStorage.removeItem("username");
+    sessionStorage.removeItem("designation");
     sessionStorage.setItem("loggedIn", false);   
     window.location="../home";    
   }

@@ -37,6 +37,7 @@ import MaintenaceRequestList from "./components/reqMaintenace-list.component";
 import AddMaintenaceRequest from "./components/user-components/create-reqMaintenance.comoponent";
 import MaintenaceRequestListUser from "./components/user-components/reqMaintenace-list.component";
 import AddMaintenaceRecord from "./components/create-maintenanceRecord.comoponent";
+import MaintenaceRecordList from "./components/maintenanceRecord-list.component";
 // import Example from "./components/modal.component";
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
           <Route path="/admin/agent-add" exact component={AddAgent}/>
           <Route path="/admin/agent-edit/:id" exact component={EditAgent}/>
           <Route path="/admin/reqmaintenance" exact component={MaintenaceRequestList}/>
+          <Route path="/admin/maintenancerec" exact component={MaintenaceRecordList}/> 
           <Route path="/admin/maintenancerec-add" exact component={AddMaintenaceRecord}/> 
           
 

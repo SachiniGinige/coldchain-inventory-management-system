@@ -129,13 +129,13 @@ thead{
   padding: 5px 10px;
 }
 
+/* Form multiple text boxes in same row (select together with searchbar) */
 .select2{
   margin-right: 50px;
 }
 .select2-search{
   margin-top: 30px;
 }
-
 .formRow{
   max-width: 930px;
 }

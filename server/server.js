@@ -847,6 +847,108 @@ app.get("/reqmaintenance/get-table", (req, res) => {
     })
 });
 
+//Maintenance records
+app.post("/maintenancerec/add", (req, res) => {
+
+    const date = req.body.date;
+    const status = req.body.status;
+    const description = req.body.description;
+    const itemId = req.body.itemId;
+    const maintenanceAgent= req.body.maintenanceAgent;
+    const updatedDate = req.body.updatedDate;
+
+    console.log(req.body.name)
+
+    const sqlInsert =  "INSERT INTO maintenance_record (date,status,description,itemId,maintenanceAgentId,updatedDate) VALUES (?, ?, ?, ?, ?, ?);";
+    
+    db.query(sqlInsert,[date, status, description, itemId, maintenanceAgent, updatedDate], (err, result)=>{
+        if(!err){
+            console.log(result)
+            res.json("Successfully added under ID: " + result.insertId);
+        }
+        else{
+            res.json(err);
+        }
+    });    
+});
+
+app.get("/maintenancerec/get", (req, res) => {
+    const sqlSelect = "SELECT * FROM coldchain_db.maintenance_record;";
+    
+    db.query(sqlSelect, (err,result)=>{
+           if(!err) {
+                res.json(result);}
+            else{
+                res.json(err);
+            }        
+    })
+});
+
+app.delete("/maintenancerec/delete/:id", (req, res)=>{
+    const id= req.params.id;
+
+    const sqlDelete = "DELETE FROM maintenance_record WHERE recordId = ?;";
+
+    db.query(sqlDelete, id, (err, result)=>{
+        if(!err){
+            console.log(result)
+            if(result.affectedRows===0){
+                res.json("Nothing to be deleted under the ID: " + id);
+            }
+            else{
+                res.json("Successfully Deleted");
+            }            
+        }
+        else{
+            res.json(err);
+        }
+    });
+});
+
+app.get("/maintenancerec/get/:id", (req, res) => {
+    const id= req.params.id;
+
+    const sqlSelect = "SELECT * FROM maintenance_record WHERE recordId= ?;";
+    
+    db.query(sqlSelect, id , (err, result)=>{
+        if(!err){
+            console.log(result);        
+            res.send(result[0]);
+        }
+        else{
+            res.json(err);
+        }
+    })
+});
+
+app.put("/maintenancerec/update/:id", (req, res)=>{
+    const id= req.params.id;
+
+    const date = req.body.date;
+    const status = req.body.status;
+    const description = req.body.description;
+    const itemId = req.body.itemId;
+    const maintenanceAgent= req.body.maintenanceAgent;
+    const updatedDate = req.body.updatedDate;
+
+    const sqlUpdate = "UPDATE maintenance_record SET date=?, status=?, description=?, itemId=?, maintenanceAgentId=?, updatedDate=? WHERE recordId = ?;";
+
+    db.query(sqlUpdate, [date, status, description, itemId, maintenanceAgent, updatedDate, id],(err, result)=>{
+        if(!err){
+            console.log(result)
+            if(result.affectedRows>=1){
+                res.json("Successfully Updated ID: " +id);
+            }
+            else{
+                res.json("Unsuccessful");
+            }            
+        }
+        else{
+            res.json(err);
+        }
+    });
+});
+
 
 //  Admin
 app.get("/admin/get", (req, res) => {

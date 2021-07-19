@@ -54,7 +54,7 @@ export default class MaintenaceRequestListUser extends Component{
                 if(val.requestId==(this.state.searchTerm))
                     {return val;} // eslint-disable-next-line
                 if(val.itemId==(this.state.searchTerm))
-                        {return val;}
+                    {return val;}
                 if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     {return val;}
                 return null;
@@ -62,7 +62,7 @@ export default class MaintenaceRequestListUser extends Component{
             return null;
             
         }).map( currentrequest => {
-            return <Request request={currentrequest} deleteRequest={this.deleteRequest} key={currentrequest.id}/>
+            return <Request request={currentrequest} key={currentrequest.id}/>
         })
     }
 

@@ -234,6 +234,7 @@ export default class AddMaintenaceRecord extends Component{
                 <label className="form-label">Item ID: </label>
                 <input type="text" className="form-control" required value={this.state.itemId} onChange={this.onChangeItem} />
                 <div class="formError">{this.state.itemErr}</div><br/>
+                <label className="form-label"> Selected Item Details (Will be filled autimatically...)</label>
                 <div className="row formRow">
                     <div className="col">
                         <label className="form-label">Equipment ID: </label>

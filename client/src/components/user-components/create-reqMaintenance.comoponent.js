@@ -239,7 +239,7 @@ export default class AddMaintenaceRequest extends Component{
                 {this.state.statusErr ? (<div class="formError">{this.state.statusErr}</div>) : null} <br/>
                                 
                 <label className="form-label">Description: </label>
-                <input type="textarea" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
+                <textarea className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
                 <div class="formError">{this.state.descriptionErr}</div><br/>                                 
 
                 <div className="row formRow">

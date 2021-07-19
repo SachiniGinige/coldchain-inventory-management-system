@@ -7,7 +7,7 @@ import homeImage from './img/homeScreenPic.png';
 
 import './css/Homepage.css' ;
 
-var uname, uid;
+var uname, uid, udesignation;
 
 export default class UserLoginPage extends Component{
     constructor(props){
@@ -54,9 +54,11 @@ export default class UserLoginPage extends Component{
 
                     uname=this.state.username;
                     uid=res.data.userId;
+                    udesignation=res.data.designation;
 
                     sessionStorage.setItem(uname,uid);
                     sessionStorage.setItem("username",uname);
+                    sessionStorage.setItem("designation",udesignation);
                     sessionStorage.setItem("loggedIn",true);
                 }
                                     

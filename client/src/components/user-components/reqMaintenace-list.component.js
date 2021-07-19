@@ -11,7 +11,6 @@ const Request = props => (
         <td>{props.request.description}</td>
         <td>{props.request.itemId}</td>
         <td>{props.request.sender}</td>
-        <td>{props.request.receiver}</td>
     </tr>
 )
 
@@ -47,19 +46,21 @@ export default class MaintenaceRequestListUser extends Component{
     
     requestList() {
         return this.state.requests.filter((val)=>{
-            if(this.state.searchTerm==='')
-                {return val;}                        
-            if(val.date.includes(this.state.searchTerm))
-                {return val;} // eslint-disable-next-line
-            if(val.requestId==(this.state.searchTerm))
-                {return val;} // eslint-disable-next-line
-            if(val.itemId==(this.state.searchTerm))
+            if(sessionStorage.getItem("username")===val.receiver){
+                if(this.state.searchTerm==='')
+                    {return val;}                        
+                if(val.date.includes(this.state.searchTerm))
+                    {return val;} // eslint-disable-next-line
+                if(val.requestId==(this.state.searchTerm))
+                    {return val;} // eslint-disable-next-line
+                if(val.itemId==(this.state.searchTerm))
+                        {return val;}
+                if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     {return val;}
-            if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;}
-            if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                {return val;} 
+                return null;
+            }
             return null;
+            
         }).map( currentrequest => {
             return <Request request={currentrequest} deleteRequest={this.deleteRequest} key={currentrequest.id}/>
         })
@@ -68,7 +69,7 @@ export default class MaintenaceRequestListUser extends Component{
     render() {
         return(
             <div className="RequestList">
-                <h3>Maintenance Requests</h3>
+                <h3>My Maintenance Requests</h3>
                 <div className="searchbarContainer" >
                     <div className="row">
                         <div className="col searchbarCol"></div>
@@ -87,7 +88,6 @@ export default class MaintenaceRequestListUser extends Component{
                                 <th>Description</th>
                                 <th>Item ID</th>
                                 <th>Sender</th>
-                                <th>Receiver</th>
                             </tr>
                         </thead>
                         <tbody>

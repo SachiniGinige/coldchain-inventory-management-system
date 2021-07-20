@@ -7,6 +7,7 @@ export default class EditLocation extends Component{
 
         this.onChangeName=this.onChangeName.bind(this);
         this.onChangeLevel=this.onChangeLevel.bind(this);
+        this.onChangeDistrict=this.onChangeDistrict.bind(this);
         this.onChangeAddress=this.onChangeAddress.bind(this);
         this.onChangeContactPerson=this.onChangeContactPerson.bind(this);
         this.onChangeContactNo1=this.onChangeContactNo1.bind(this);
@@ -23,7 +24,10 @@ export default class EditLocation extends Component{
             contactNo1: '',
             contactNo2: '',
             status: '',
-            suffix: ''
+            suffix: '',
+
+            district: '',
+            districts: []
         }
     }
 
@@ -45,6 +49,16 @@ export default class EditLocation extends Component{
             .catch(function(error){
                 console.log(error);
             })
+
+        axios.get('http://localhost:3001/locations/get-districts/')
+            .then(response => {
+                if (response.data.length > 0){
+                    this.setState({
+                        districts: response.data.map(district=> district),
+                        district: response.data[0].locationId
+                    })
+                }
+            })
     }
 
     onChangeName(e){
@@ -62,6 +76,11 @@ export default class EditLocation extends Component{
     onChangeAddress(e){
         this.setState({
             address: e.target.value
+        });
+    }
+    onChangeDistrict(e){
+        this.setState({
+            district: e.target.value
         });
     }
     onChangeContactPerson(e){
@@ -97,13 +116,31 @@ export default class EditLocation extends Component{
             contactNo2:  this.state.contactNo2,
             status:  this.state.status
         }
-
         console.log(location);
 
         axios.put(`http://localhost:3001/locations/update/${this.props.match.params.id}`, location)
             .then(res => console.log(res.data));
         
-        alert("Location edited");        
+        alert("Location edited");  
+        
+        if(this.state.level==="Divisional"){
+            const divisionalLocation = {
+                district:  this.state.district
+            }
+            console.log(divisionalLocation);
+
+            axios.put(`http://localhost:3001/divisional-locations/update/${this.props.match.params.id}`, divisionalLocation)
+                .then(res => console.log(res.data));
+
+            // IF DIVISIONAL LOCATION NOT ADDED
+            // const divisionalLocation = {
+            //     name:  this.state.name+this.state.suffix,
+            //     district:  this.state.district
+            // }
+            // axios.post('http://localhost:3001/divisional-locations/add', divisionalLocation)
+            //     .then(res => console.log(res.data));
+        }
+
         window.location = '../locations';
         
     }
@@ -155,7 +192,21 @@ export default class EditLocation extends Component{
                         Divisional Level
                     </label>
                     <br/><br/>
-                </div>     
+                </div>  
+                
+                {this.state.level==="Divisional"? 
+                        (<div><label className="form-label">District: </label>
+                        <select className="form-control" value={this.state.district} onChange={this.onChangeDistrict}>
+                                {
+                                    this.state.districts.map(function(district) {
+                                        return <option value={district.locationId}>
+                                            {district.name}
+                                        </option>;
+                                    })
+                                }
+                    </select><br/></div>) 
+                        : null}
+
                 <label className="form-label">Address: </label>
                 <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} />
                 <br/>                                                     

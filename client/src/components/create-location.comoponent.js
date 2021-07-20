@@ -58,7 +58,7 @@ export default class AddLocation extends Component{
     }
     onChangeDistrict(e){
         this.setState({
-            address: e.target.value
+            district: e.target.value
         });
     }
     onChangeAddress(e){

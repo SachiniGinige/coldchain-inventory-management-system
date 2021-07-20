@@ -50,12 +50,24 @@ export default class EditLocation extends Component{
                 console.log(error);
             })
 
+        axios.get(`http://localhost:3001/divisional-locations/get/${this.props.match.params.id}`)
+            .then(response => { 
+                console.log(this.props.match);
+                console.log(response);               
+                this.setState({
+                    district: response.data.district
+                })    
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+
         axios.get('http://localhost:3001/locations/get-districts/')
             .then(response => {
                 if (response.data.length > 0){
                     this.setState({
                         districts: response.data.map(district=> district),
-                        district: response.data[0].locationId
+                        // district: response.data[0].locationId
                     })
                 }
             })

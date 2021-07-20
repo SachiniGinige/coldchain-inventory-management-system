@@ -697,6 +697,66 @@ app.post("/divisional-locations/add", (req, res) => {
     });    
 });
 
+app.delete("/divisional-locations/delete/:id", (req, res)=>{
+    const id= req.params.id;
+
+    const sqlDelete = "DELETE FROM divisional_location WHERE locationId = ?;";
+
+    db.query(sqlDelete, id, (err, result)=>{
+        if(!err){
+            console.log(result)
+            if(result.affectedRows===0){
+                res.json("Nothing to be deleted under the ID: " + id);
+            }
+            else{
+                res.json("Successfully Deleted");
+            }            
+        }
+        else{
+            res.json(err);
+        }
+    });
+});
+
+app.get("/divisional-locations/get/:id", (req, res) => {
+    const id= req.params.id;
+
+    const sqlSelect = "SELECT * FROM divisional_location WHERE locationId= ?;";
+    
+    db.query(sqlSelect, id , (err, result)=>{
+        if(!err){
+            console.log(result);        
+            res.send(result[0]);
+        }
+        else{
+            res.json(err);
+        }
+    })
+});
+
+app.put("/divisional-locations/update/:id", (req, res)=>{
+    const id= req.params.id;
+
+    const district = req.body.district;
+
+    const sqlUpdate = "UPDATE divisional_location SET district=? WHERE locationId = ?;";
+
+    db.query(sqlUpdate, [district, id],(err, result)=>{
+        if(!err){
+            console.log(result)
+            if(result.affectedRows>=1){
+                res.json("Successfully Updated ID: " +id);
+            }
+            else{
+                res.json("Unsuccessful");
+            }            
+        }
+        else{
+            res.json(err);
+        }
+    });
+});
+
 //Agents (Supply and Maintenance)
 app.post("/agents/add", (req, res) => {
 

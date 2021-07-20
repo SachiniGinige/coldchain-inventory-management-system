@@ -16,7 +16,7 @@ const Location = props => (
         <td>{props.location.status}</td>
         <td>
             <Link to={"./location-edit/"+props.location.locationId}>edit</Link>
-             |<a href="./locations" onClick={() => {props.deleteLocation(props.location.locationId)}}> delete</a>
+             |<a href="./locations" onClick={() => {props.deleteLocation(props.location.locationId,props.location.level)}}> delete</a>
         </td>
     </tr>
 )
@@ -53,13 +53,18 @@ export default class LocationList extends Component{
         });
     }
 
-    deleteLocation(id) {
+    deleteLocation(id,level) {
 
         alert("Are you sure you want to delete Location No. "+id+"?");
 
         axios.delete(`http://localhost:3001/locations/delete/${id}`)
             .then(res => console.log(res.data));
 
+        if(level==="Divisional"){
+            axios.delete(`http://localhost:3001/divisional-locations/delete/${id}`)
+                .then(res => console.log(res.data));
+        }
+        
         this.setState({
             locations: this.state.locations.filter(el => el.locationId !==id)
         })

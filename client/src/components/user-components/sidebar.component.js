@@ -26,6 +26,11 @@ function SidebarUser() {
                     <img src={equipIcon} className="sidebaricon" alt=""/> Equipment
                 </NavLink>
             </div>
+            <div className="sidebarlinkcont" id="equipmentLink">    
+                <NavLink to="./maintenancerec" id="maintenanceLink">
+                    <img src={equipIcon} className="sidebaricon" alt=""/> Maintenace
+                </NavLink>
+            </div>
             <div class="sidebarlinkcont"> 
                 <NavLink to="./locations">
                     <img src={locationIcon} className="sidebaricon" alt=""/> Locations
@@ -38,7 +43,7 @@ function SidebarUser() {
             </div>
             <div class="sidebarlinkcont">       
                 <NavLink to="./agents">
-                    <img src={agentsIcon} className="sidebaricon" alt=""/> Supply Agents
+                    <img src={agentsIcon} className="sidebaricon" alt=""/> Agents
                 </NavLink>
             </div>
             <div class="sidebarlinkcont">       

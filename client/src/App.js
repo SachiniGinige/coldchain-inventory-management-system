@@ -38,6 +38,8 @@ import AddMaintenaceRequest from "./components/user-components/create-reqMainten
 import MaintenaceRequestListUser from "./components/user-components/reqMaintenace-list.component";
 import AddMaintenaceRecord from "./components/create-maintenanceRecord.comoponent";
 import MaintenaceRecordList from "./components/maintenanceRecord-list.component";
+import EditMaintenaceRecord from "./components/edit-maintenanceRecord.comoponent";
+import MaintenaceRecordListUser from "./components/user-components/maintenanceRecord-list.component";
 // import Example from "./components/modal.component";
 
 function App() {
@@ -73,7 +75,8 @@ function App() {
           <Route path="/admin/agent-edit/:id" exact component={EditAgent}/>
           <Route path="/admin/reqmaintenance" exact component={MaintenaceRequestList}/>
           <Route path="/admin/maintenancerec" exact component={MaintenaceRecordList}/> 
-          <Route path="/admin/maintenancerec-add" exact component={AddMaintenaceRecord}/> 
+          <Route path="/admin/maintenancerec-add" exact component={AddMaintenaceRecord}/>
+          <Route path="/admin/maintenancerec-edit/:id" exact component={EditMaintenaceRecord}/> 
           
 
           <Route path="/user/equipment" exact component={ItemListUser}/>
@@ -84,7 +87,8 @@ function App() {
           <Route path="/user/users" exact component={UserListUser}/>
           <Route path="/user/agents" exact component={AgentListUser}/>
           <Route path="/user/reqmaintenance" exact component={MaintenaceRequestListUser}/>
-          <Route path="/user/reqmaintenance-add" exact component={AddMaintenaceRequest}/>          
+          <Route path="/user/reqmaintenance-add" exact component={AddMaintenaceRequest}/> 
+          <Route path="/user/maintenancerec" exact component={MaintenaceRecordListUser}/>          
         </div> 
         </div>
         <Route path="/home" component={Footer}/>       

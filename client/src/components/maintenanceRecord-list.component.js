@@ -6,8 +6,8 @@ import Table from 'react-bootstrap/Table';
 
 const Record = props => (
     <tr>
-        <td>{props.record.recordId}</td>
-        <td>{new Date(props.record.date).toLocaleString('en',{ timeZone: 'Asia/Colombo' })}</td>
+        {/* <td>{props.record.recordId}</td> */}
+        <td>{props.record.date.toString().substring(0,10)}</td>
         <td>{props.record.status}</td>
         <td>{props.record.description}</td>
         <td>{props.record.itemId}</td>
@@ -72,13 +72,11 @@ export default class MaintenaceRecordList extends Component{
                 {return val;} // eslint-disable-next-line
             else if(val.itemId==(this.state.searchTerm))
                     {return val;}
-            // else if(val.sender.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+            // else if(val.maintenanceAgent.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
             //     {return val;}
-            // else if(val.receiver.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-            //     {return val;} 
             return null;
         }).map( currentrecord => {
-            return <Record record={currentrecord} deleteRecord={this.deleteRecord} key={currentrecord.id}/>
+            return <Record record={currentrecord} deleteRecord={this.deleteRecord} key={currentrecord.recordId}/>
         })
     }
 
@@ -98,7 +96,7 @@ export default class MaintenaceRecordList extends Component{
                     <Table className="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Request ID</th>
+                                {/* <th>Request ID</th> */}
                                 <th>Sent Date</th>
                                 <th>Status</th>
                                 <th>Description</th>

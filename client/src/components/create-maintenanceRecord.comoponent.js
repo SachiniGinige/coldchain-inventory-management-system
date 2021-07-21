@@ -59,7 +59,7 @@ export default class AddMaintenaceRecord extends Component{
                     itemEq: '',
                     itemModel: '',
                     itemLoc: '', 
-                    maintenanceAgent: 1               
+                    maintenanceAgent: '1'               
                 }) 
             }
             else{
@@ -234,7 +234,7 @@ export default class AddMaintenaceRecord extends Component{
                 <label className="form-label">Item ID: </label>
                 <input type="text" className="form-control" required value={this.state.itemId} onChange={this.onChangeItem} />
                 <div class="formError">{this.state.itemErr}</div><br/>
-                <label className="form-label"> Selected Item Details (Will be filled autimatically...)</label>
+                <label className="form-label"> Selected Item Details (Will be filled automatically...)</label>
                 <div className="row formRow">
                     <div className="col">
                         <label className="form-label">Equipment ID: </label>
@@ -266,7 +266,7 @@ export default class AddMaintenaceRecord extends Component{
                 <select className="form-control" value={this.state.maintenanceAgent} onChange={this.onChangeMaintenanceAgent}>
                             {
                                 this.state.agents.map(function(agent) {
-                                    return <option value={agent.agentId}>
+                                    return <option key={agent.agentId} value={agent.agentId}>
                                         {agent.name}
                                     </option>;
                                 })

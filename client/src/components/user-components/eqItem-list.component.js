@@ -191,9 +191,7 @@ export default class ItemListUser extends Component{
                 
                 <span className="btnContainer"><a className="btn btn-outline-primary" href="./eqtype"> Equipment Types </a></span>
                 <span className="btnContainer"><a className="btn btn-outline-primary" href="./model"> Equipment Models </a></span>
-                {sessionStorage.getItem("designation")==="MOH" ? 
-                        (<span className="btnContainer"><a className="btn btn-outline-primary" href="./reqmaintenance-add">Add Maintenance Request </a></span>)
-                        : (<span className="btnContainer"><a className="btn btn-outline-primary" href="./reqmaintenance"> Maintenance Requests </a></span>)}
+                
             </div>
         );
     }

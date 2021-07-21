@@ -933,7 +933,7 @@ app.post("/maintenancerec/add", (req, res) => {
 });
 
 app.get("/maintenancerec/get", (req, res) => {
-    const sqlSelect = "SELECT * FROM coldchain_db.maintenance_record;";
+    const sqlSelect = "SELECT * FROM coldchain_db.maintenance_record ORDER BY date DESC;";
     
     db.query(sqlSelect, (err,result)=>{
            if(!err) {

@@ -64,6 +64,7 @@ export default class UserLoginPage extends Component{
                                     
                 if(res.data.message==="Invalid credentials")
                     alert(res.data.message);
+                    // window.confirm(res.data.message);
 
                 console.log(res.data);
             });        

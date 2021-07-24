@@ -76,7 +76,7 @@ export default class MaintenaceRecordListUser extends Component{
                     </div>
                 </div>
                 <div className="table-responsive" >
-                    <Table className="table table-light table-bordered table-hover">
+                    <Table className="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 {/* <th>Request ID</th> */}

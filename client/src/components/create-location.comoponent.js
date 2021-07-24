@@ -237,15 +237,15 @@ export default class AddLocation extends Component{
                             <input type="text" className="form-control" value={this.state.addrCity} onChange={this.onChangeAddrCity} placeholder="e.g.: Maradana"/>
                         </div>    
                     </div>
-                    <br/>
-                    <div className="row formRow"> 
+                    {/* <br/> */}
+                    {/* <div className="row formRow"> 
                         <div className="col-md-auto">
                             <label className="form-label">Postal Code: </label>
                         </div>
-                        {/* <div className="col">
+                        <div className="col">
                             <input type="text" className="form-control" value={this.state.addrPostalCode} onChange={this.onChangeAddrPostalCode} />
-                        </div>     */}
-                    </div>
+                        </div>    
+                    </div> */}
                     <br/><br/>                             
                     <label className="form-label">Contact Person: </label>
                     <input type="email" className="form-control" value={this.state.contactPerson} onChange={this.onChangeContactPerson} />

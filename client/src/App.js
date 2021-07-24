@@ -40,6 +40,7 @@ import AddMaintenaceRecord from "./components/create-maintenanceRecord.comoponen
 import MaintenaceRecordList from "./components/maintenanceRecord-list.component";
 import EditMaintenaceRecord from "./components/edit-maintenanceRecord.comoponent";
 import MaintenaceRecordListUser from "./components/user-components/maintenanceRecord-list.component";
+import TestReport from "./components/TestReport.component";
 // import Example from "./components/modal.component";
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
           <Route path="/admin/maintenancerec" exact component={MaintenaceRecordList}/> 
           <Route path="/admin/maintenancerec-add" exact component={AddMaintenaceRecord}/>
           <Route path="/admin/maintenancerec-edit/:id" exact component={EditMaintenaceRecord}/> 
+          <Route path="/admin/report" exact component={TestReport}/> 
           
 
           <Route path="/user/equipment" exact component={ItemListUser}/>

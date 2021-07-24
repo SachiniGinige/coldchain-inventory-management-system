@@ -8,7 +8,10 @@ export default class AddLocation extends Component{
         this.onChangeName=this.onChangeName.bind(this);
         this.onChangeLevel=this.onChangeLevel.bind(this);
         this.onChangeDistrict=this.onChangeDistrict.bind(this);
-        this.onChangeAddress=this.onChangeAddress.bind(this);
+        this.onChangeAddrBuilding=this.onChangeAddrBuilding.bind(this);
+        this.onChangeAddrCity=this.onChangeAddrCity.bind(this);
+        this.onChangeAddrStreet=this.onChangeAddrStreet.bind(this);
+        // this.onChangeAddrPostalCode=this.onChangeAddrPostalCode.bind(this);
         this.onChangeContactPerson=this.onChangeContactPerson.bind(this);
         this.onChangeContactNo1=this.onChangeContactNo1.bind(this);
         this.onChangeContactNo2=this.onChangeContactNo2.bind(this);
@@ -19,6 +22,10 @@ export default class AddLocation extends Component{
             name: '',
             level: '',
             address: '',
+            addrBuilding: '',
+            addrStreet: '',
+            addrCity: '',
+            // addrPostalCode: '',
             contactPerson: '',
             contactNo1: '',
             contactNo2: '',
@@ -61,11 +68,26 @@ export default class AddLocation extends Component{
             district: e.target.value
         });
     }
-    onChangeAddress(e){
+    onChangeAddrBuilding(e){
         this.setState({
-            address: e.target.value
+            addrBuilding: e.target.value
         });
     }
+    onChangeAddrStreet(e){
+        this.setState({
+            addrStreet: e.target.value
+        });
+    }
+    onChangeAddrCity(e){
+        this.setState({
+            addrCity: e.target.value
+        });
+    }
+    // onChangeAddrPostalCode(e){
+    //     this.setState({
+    //         addrPostalCode: e.target.value
+    //     });
+    // }
     onChangeContactPerson(e){
         this.setState({
             contactPerson: e.target.value
@@ -94,7 +116,10 @@ export default class AddLocation extends Component{
         const location = {
             name:  this.state.name+this.state.suffix,
             level:  this.state.level,
-            address:  this.state.address,
+            addrBuilding:  this.state.addrBuilding,
+            addrStreet:  this.state.addrStreet,
+            addrCity:  this.state.addrCity,
+            address:  this.state.addrStreet+", "+this.state.addrCity,
             contactPerson: this.state.contactPerson,
             contactNo1:  this.state.contactNo1,
             contactNo2:  this.state.contactNo2,
@@ -128,7 +153,7 @@ export default class AddLocation extends Component{
                     <h3>Add New Location</h3><br/>
                     
                     <label className="form-label">Name: </label>
-                    <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} placeholder="eg: Colombo"/>
+                    <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} placeholder="e.g.: Colombo"/>
                     <br/>                 
                     <label className="form-label">Location Level: </label>
                     <div className="form-check">
@@ -183,9 +208,45 @@ export default class AddLocation extends Component{
                     </select><br/></div>) 
                         : null}
 
+                    <br/>
                     <label className="form-label">Address: </label>
-                    <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} />
-                    <br/>                             
+                    {/* <input type="text" className="form-control" value={this.state.address} onChange={this.onChangeAddress} /> */}
+                    <div className="row formRow"> 
+                        <div className="col-md-auto">
+                            <label className="form-label">Building Name (Optional): </label>
+                        </div>
+                        <div className="col">
+                            <input type="text" className="form-control" value={this.state.addrBuilding} onChange={this.onChangeAddrBuilding} placeholder="e.g.: Epidemiology Unit, Familiy Health Bureau"/>
+                        </div>    
+                    </div>
+                    <br/>
+                    <div className="row formRow"> 
+                        <div className="col-md-auto">
+                            <label className="form-label">Street: </label>
+                        </div>
+                        <div className="col">
+                            <input type="text" className="form-control" value={this.state.addrStreet} onChange={this.onChangeAddrStreet} placeholder="e.g.: 231, De Saram Pl"/>
+                        </div>    
+                    </div>
+                    <br/>
+                    <div className="row formRow"> 
+                        <div className="col-md-auto">
+                            <label className="form-label">City: </label>
+                        </div>
+                        <div className="col">
+                            <input type="text" className="form-control" value={this.state.addrCity} onChange={this.onChangeAddrCity} placeholder="e.g.: Maradana"/>
+                        </div>    
+                    </div>
+                    <br/>
+                    <div className="row formRow"> 
+                        <div className="col-md-auto">
+                            <label className="form-label">Postal Code: </label>
+                        </div>
+                        {/* <div className="col">
+                            <input type="text" className="form-control" value={this.state.addrPostalCode} onChange={this.onChangeAddrPostalCode} />
+                        </div>     */}
+                    </div>
+                    <br/><br/>                             
                     <label className="form-label">Contact Person: </label>
                     <input type="email" className="form-control" value={this.state.contactPerson} onChange={this.onChangeContactPerson} />
                     <br/>

@@ -567,6 +567,9 @@ app.post("/locations/add", (req, res) => {
 
     const name = req.body.name;
     const level = req.body.level;
+    const addrBuilding = req.body.addrBuilding;
+    const addrStreet = req.body.addrStreet;
+    const addrCity = req.body.addrCity;
     const address = req.body.address;
     const contactPerson = req.body.contactPerson;
     const contactNo1= req.body.contactNo1;
@@ -575,9 +578,9 @@ app.post("/locations/add", (req, res) => {
 
     console.log(req.body.name)
 
-    const sqlInsert =  "INSERT INTO location (name,level,address,contactPerson,contactNo1,contactNo2,status) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    const sqlInsert =  "INSERT INTO location (name,level,address,buildingName,street,city,contactPerson,contactNo1,contactNo2,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     
-    db.query(sqlInsert,[name, level, address, contactPerson, contactNo1, contactNo2, status], (err, result)=>{
+    db.query(sqlInsert,[name, level, address, addrBuilding,addrStreet, addrCity, contactPerson, contactNo1, contactNo2, status], (err, result)=>{
         if(!err){
             console.log(result)
             res.json("Successfully added under ID: " + result.insertId);

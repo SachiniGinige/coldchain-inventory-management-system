@@ -128,6 +128,9 @@ thead{
   font-weight: 500;
   padding: 5px 10px;
 }
+.filterIcon{
+  height: 10px;
+}
 
 /* Form multiple text boxes in same row (select together with searchbar) */
 .select2{
@@ -138,4 +141,9 @@ thead{
 }
 .formRow{
   max-width: 930px;
+}
+
+.shortcutIcon{
+  height: 16px;
+  margin: 8px;
 }

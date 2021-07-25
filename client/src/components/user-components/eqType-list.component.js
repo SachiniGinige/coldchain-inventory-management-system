@@ -69,7 +69,7 @@ export default class EqTypeListUser extends Component{
                 <div className="table-responsive">
                     {/* table of all equipment types */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Equipment ID</th>
                                 <th>Equipment Name</th>

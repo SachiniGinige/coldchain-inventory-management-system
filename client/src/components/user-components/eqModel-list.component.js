@@ -75,7 +75,7 @@ export default class ModelListUser extends Component{
                 <div className="table-responsive">
                     {/* table of all equipment models */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Model ID</th>
                                 <th>Model Name</th>

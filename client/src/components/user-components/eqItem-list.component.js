@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from '../img/edit.png';
 
 var uname=sessionStorage.getItem('username');
 var id=sessionStorage.getItem(uname);
@@ -22,7 +23,7 @@ const Item = props => (
         <td>{props.item.supplyAgent}</td>
         <td>{props.item.maintenanceAgent}</td>
         <td>
-            <Link to={"./eqitem-edit/"+props.item.itemId}>edit</Link>
+            <Link to={"./eqitem-edit/"+props.item.itemId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
         </td>
     </tr>
 )
@@ -166,7 +167,7 @@ export default class ItemListUser extends Component{
                 <div className="table-responsive">
                     {/* table of all equipment items */}
                     <Table className="table table-sm table-striped table-bordered table-hover">
-                        <thead >
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Item ID</th>
                                 <th>Procured Date</th>

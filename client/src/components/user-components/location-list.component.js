@@ -79,7 +79,7 @@ export default class LocationListUser extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Location ID</th>
                                 <th>Location Name</th>

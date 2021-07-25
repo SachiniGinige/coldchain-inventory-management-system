@@ -110,7 +110,7 @@ export default class UserListUser extends Component{
                 <div className="table-responsive">
                     {/* table of all users */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>User ID</th>
                                 <th>User Name</th>

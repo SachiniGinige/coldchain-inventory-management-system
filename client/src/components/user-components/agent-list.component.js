@@ -10,7 +10,8 @@ const Agent = props => (
         <td>{props.agent.contactPerson}</td>
         <td>{props.agent.contactNo}</td>
         <td>{props.agent.email}</td>
-        <td>{props.agent.address}</td>
+        {/* <td>{props.agent.address}</td> */}
+        <td><a href={props.agent.mapLink}>{props.agent.address}</a></td>
     </tr>
 )
 
@@ -71,7 +72,7 @@ export default class AgentListUser extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-hover table-bordered">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Agent ID</th>
                                 <th>Agent Name</th>

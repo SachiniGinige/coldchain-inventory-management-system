@@ -80,7 +80,7 @@ export default class MaintenaceRequestListUser extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Request ID</th>
                                 <th>Sent Date/Time</th>

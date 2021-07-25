@@ -47,7 +47,7 @@ export default class UserLoginPage extends Component{
                 if(res.data.username===this.state.username && res.data.password===this.state.password){
                     //set loggedin to true
                     alert("Welcome "+this.state.username+"!");
-                    window.location="../user/equipment";
+                    window.location="../user/home";
 
                     sessionStorage.removeItem(sessionStorage.getItem("username"));
                     sessionStorage.removeItem("username");

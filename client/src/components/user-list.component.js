@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const User = props => (
     <tr>
@@ -12,9 +14,9 @@ const User = props => (
         <td>{props.user.email}</td>
         <td>{props.user.contactNo}</td>
         <td>{props.user.location}</td>
-        <td>
-            <Link to={"./user-edit/"+props.user.userId}>edit</Link>
-             |<a href="./users" onClick={() => {props.deleteUser(props.user.userId)}}> delete</a>
+        <td style={{textAlign: "center"}}>
+            <Link to={"./user-edit/"+props.user.userId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./users" onClick={() => {props.deleteUser(props.user.userId)}}><img src={deleteIcon} className="shortcutIcon" alt=""/></a>
         </td>
     </tr>
 )
@@ -127,7 +129,7 @@ export default class UserList extends Component{
                 <div className="table-responsive">
                     {/* table of all users */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>User ID</th>
                                 <th>User Name</th>
@@ -135,7 +137,7 @@ export default class UserList extends Component{
                                 <th>Email</th>
                                 <th>Contact No.</th>
                                 <th>Location</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 80 }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

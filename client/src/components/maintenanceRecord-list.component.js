@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const Record = props => (
     <tr>
@@ -14,8 +16,8 @@ const Record = props => (
         <td>{props.record.maintenanceAgentId}</td>
         <td>{new Date(props.record.updatedDate).toLocaleString('en',{ timeZone: 'Asia/Colombo' })}</td>
         <td>
-            <Link to={"./maintenancerec-edit/"+props.record.recordId}>edit</Link>
-             |<a href="./maintenancerec" onClick={() => {props.deleteRecord(props.record.recordId)}}> delete</a>
+            <Link to={"./maintenancerec-edit/"+props.record.recordId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./maintenancerec" onClick={() => {props.deleteRecord(props.record.recordId)}}><img src={deleteIcon} className="shortcutIcon" alt="" /></a>
         </td>
     </tr>
 )
@@ -94,7 +96,7 @@ export default class MaintenaceRecordList extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 {/* <th>Request ID</th> */}
                                 <th>Sent Date</th>
@@ -103,7 +105,7 @@ export default class MaintenaceRecordList extends Component{
                                 <th>Item ID</th>
                                 <th>Maintenance Agent</th>
                                 <th>Updated Date</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 80 }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

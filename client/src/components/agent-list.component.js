@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const Agent = props => (
     <tr>
@@ -11,10 +13,11 @@ const Agent = props => (
         <td>{props.agent.contactPerson}</td>
         <td>{props.agent.contactNo}</td>
         <td>{props.agent.email}</td>
-        <td>{props.agent.address}</td>
-        <td>
-            <Link to={"./agent-edit/"+props.agent.agentId}>edit</Link>
-             |<a href="./agents" onClick={() => {props.deleteAgent(props.agent.agentId)}}> delete</a>
+        {/* <td>{props.agent.address}</td> */}
+        <td><a href={props.agent.mapLink}>{props.agent.address}</a></td>
+        <td style={{ textAlign: "center" }}>
+            <Link to={"./agent-edit/"+props.agent.agentId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./agents" onClick={() => {props.deleteAgent(props.agent.agentId)}}><img src={deleteIcon} className="shortcutIcon" alt=""/></a>
         </td>
     </tr>
 )
@@ -88,7 +91,7 @@ export default class AgentList extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{ textAlign: "center" }}>
                             <tr>
                                 <th>Agent ID</th>
                                 <th>Agent Name</th>
@@ -96,7 +99,7 @@ export default class AgentList extends Component{
                                 <th>Contact No. </th>
                                 <th>Email Address</th>
                                 <th>Address</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 100 }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

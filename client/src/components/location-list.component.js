@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const Location = props => (
     <tr>
@@ -14,9 +16,9 @@ const Location = props => (
         <td>{props.location.contactNo1}</td>
         <td>{props.location.contactNo2}</td>
         <td>{props.location.status}</td>
-        <td>
-            <Link to={"./location-edit/"+props.location.locationId}>edit</Link>
-             |<a href="./locations" onClick={() => {props.deleteLocation(props.location.locationId,props.location.level)}}> delete</a>
+        <td style={{textAlign: "center"}}>
+            <Link to={"./location-edit/"+props.location.locationId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./locations" onClick={() => {props.deleteLocation(props.location.locationId,props.location.level)}}><img src={deleteIcon} className="shortcutIcon" alt=""/></a>
         </td>
     </tr>
 )
@@ -102,16 +104,16 @@ export default class LocationList extends Component{
                 </div>
                 <div className="table-responsive">
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Location ID</th>
                                 <th>Location Name</th>
                                 <th>Address</th>
                                 <th>Contact Person</th>
-                                <th>Contact No. 1</th>
-                                <th>Contact No. 2</th>
+                                <th>Contact No.</th>
+                                <th>Additional Contact No.</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 100 }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

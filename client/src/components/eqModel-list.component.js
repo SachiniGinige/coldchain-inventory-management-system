@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const Model = props => (
     <tr>
@@ -10,9 +12,9 @@ const Model = props => (
         <td>{props.eqmodel.model}</td>
         <td>{props.eqmodel.eqtype}</td>
         <td>{props.eqmodel.agent}</td>
-        <td>
-            <Link to={"./model-edit/"+props.eqmodel.modelId}>edit</Link>
-             |<a href="./model" onClick={() => {props.deleteModel(props.eqmodel.modelId)}}> delete</a>
+        <td style={{textAlign: "center"}}>
+            <Link to={"./model-edit/"+props.eqmodel.modelId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./model" onClick={() => {props.deleteModel(props.eqmodel.modelId)}}> <img src={deleteIcon} className="shortcutIcon" alt="" /></a>
         </td>
     </tr>
 )
@@ -93,13 +95,13 @@ export default class ModelList extends Component{
                 <div className="table-responsive">
                     {/* table of all equipment models */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Model ID</th>
                                 <th>Model Name</th>
                                 <th>Equipment Type</th>
                                 <th>Supply Agent</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 80}}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

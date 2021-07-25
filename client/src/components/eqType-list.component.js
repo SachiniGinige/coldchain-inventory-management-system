@@ -3,14 +3,16 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 
 import Table from 'react-bootstrap/Table';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/delete.png';
 
 const EqType = props => (
     <tr>
         <td>{props.type.equipmentId}</td>
         <td>{props.type.name}</td>
-        <td>
-            <Link to={"./eqtype-edit/"+props.type.equipmentId}>edit</Link>
-             |<a href="./eqtype" onClick={() => {props.deleteEqType(props.type.equipmentId)}}> delete</a>
+        <td style={{textAlign: "center"}}>
+            <Link to={"./eqtype-edit/"+props.type.equipmentId}><img src={editIcon} className="shortcutIcon" alt=""/></Link>
+             |<a href="./eqtype" onClick={() => {props.deleteEqType(props.type.equipmentId)}}><img src={deleteIcon} className="shortcutIcon" alt=""/></a>
         </td>
     </tr>
 )
@@ -86,11 +88,11 @@ export default class EqTypeList extends Component{
                 <div className="table-responsive">
                     {/* table of all equipment types */}
                     <Table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead style={{textAlign: "center"}}>
                             <tr>
                                 <th>Equipment ID</th>
                                 <th>Equipment Name</th>
-                                <th>Actions</th>
+                                <th style={{ minWidth: 80 }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

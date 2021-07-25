@@ -1,25 +1,33 @@
-import homeIcon from './img/homeIcon.png';
+import linkIcon from './img/link.png';
+import emailIcon from './img/email.png';
+import googleIcon from './img/mapMarker.png';
+import facebookIcon from './img/facebook.png';
 
-import '../App.css' ;
+import '../App.css';
 
 function Footer() {
     return (
-            <div id="footerContainer">
+        <div id="footerContainer">
             <footer class="bg-dark text-white">
-            <div class="container p-4">
+                <div class="container p-4">
 
-                <section id="footerIconSection" class="mb-4" >
-                {/* <!-- Facebook --> */}
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><img src={homeIcon} className="footerIcon" alt=""/></a>
+                    <section id="footerIconSection" class="mb-4" >
+                        {/* <!-- Website --> */}
+                        <a class="btn btn-outline-light btn-floating m-2" href="http://epid.gov.lk/web" role="button"><img src={linkIcon} className="footerIcon" alt="" /></a>
 
-                {/* <!-- Twitter --> */}
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><img src={homeIcon} className="footerIcon" alt=""/></a>
+                        {/* <!-- Email --> */}
+                        <a class="btn btn-outline-light btn-floating m-2" href="mailto:epidunit@sltnet.lk" role="button"><img src={emailIcon} className="footerIcon" alt="" /></a>
 
-                {/* <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a> */}
-                </section>
+                        {/* <!-- Google --> */}
+                        <a class="btn btn-outline-light btn-floating m-2" href="https://goo.gl/maps/oRcnUjN8mmhRVEzP9" role="button"><img src={googleIcon} className="footerIcon" alt="" /></a>
+
+                        {/* <!-- Facebook -->
+                        <a class="btn btn-outline-light btn-floating m-2" href="#!" role="button"><img src={facebookIcon} className="footerIcon" alt="" /></a> */}
+
+                    </section>
 
 
-                {/* <!-- Section: Form -->
+                    {/* <!-- Section: Form -->
                 <section class="">
                 <form action="">
                     <!--Grid row-->
@@ -55,19 +63,19 @@ function Footer() {
                 <!-- Section: Form --> */}
 
 
-                {/* <!-- Section: Text --> */}
-                <section class="mb-4">
+                    {/* <!-- Section: Text --> */}
+                    {/* <section class="mb-4">
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
                     distinctio earum repellat quaerat voluptatibus placeat nam,
                     commodi optio pariatur est quia magnam eum harum corrupti dicta,
                     aliquam sequi voluptate quas.
                 </p>
-                </section>
-                {/* <!-- Section: Text --> */}
+                </section> */}
+                    {/* <!-- Section: Text --> */}
 
 
-                {/* <!-- Section: Links -->
+                    {/* <!-- Section: Links -->
                 <section class="">
                 <!--Grid row-->
                 <div class="row">
@@ -159,19 +167,19 @@ function Footer() {
                 </section>
                 <!-- Section: Links --> */}
 
-            </div>
-            {/* <!-- Grid container --> */}
+                </div>
+                {/* <!-- Grid container --> */}
 
-            {/* <!-- Copyright --> */}
-            <div class="text-center p-3">
-                © 2021 Copyright:
-                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-            </div>
-            {/* <!-- Copyright --> */}
+                {/* <!-- Copyright --> */}
+                <div class="text-center p-3">
+                    © 2021 Copyright:
+                    <a class="text-white" href="http://epid.gov.lk/web">Epidemiology Unit</a>
+                </div>
+                {/* <!-- Copyright --> */}
 
             </footer>
             {/* // <!-- Footer --> */}
-            </div>
+        </div>
     );
 }
 export default Footer;

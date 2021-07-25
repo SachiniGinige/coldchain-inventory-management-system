@@ -80,8 +80,8 @@ thead{
   justify-content: center;
 }
 .footerIcon{
-  height: 22px;
-  padding: 0 0 6px 0;
+  /* height: 22px; */
+  padding: 3px 0 5px 0px;
   /* padding-bottom: 5px; */
 }
 

@@ -1,5 +1,6 @@
 import homeIcon from './img/homeIcon.png';
 import equipIcon from './img/equipmentIcon.png';
+import maintIcon from './img/maintenance.png';
 import locationIcon from './img/locationIcon.png';
 import usersIcon from './img/usersIcon.png';
 import agentsIcon from './img/agentsIcon.png';
@@ -28,7 +29,7 @@ function Sidebar() {
             </div>
             <div className="sidebarlinkcont" id="equipmentLink">    
                 <NavLink to="./maintenancerec" id="maintenanceLink">
-                    <img src={equipIcon} className="sidebaricon" alt=""/> Maintenace
+                    <img src={maintIcon} className="sidebaricon" alt=""/> Maintenace
                 </NavLink>
             </div>
             <div className="sidebarlinkcont"> 

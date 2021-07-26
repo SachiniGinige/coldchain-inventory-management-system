@@ -1,7 +1,7 @@
 import linkIcon from './img/link.png';
 import emailIcon from './img/email.png';
 import googleIcon from './img/mapMarker.png';
-import facebookIcon from './img/facebook.png';
+// import facebookIcon from './img/facebook.png';
 
 import '../App.css';
 

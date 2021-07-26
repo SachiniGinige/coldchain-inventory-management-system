@@ -5,7 +5,7 @@ import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import editIcon from './img/edit.png';
 import deleteIcon from './img/delete.png';
-import filterIcon from './img/filterIcon.png';
+// import filterIcon from './img/filterIcon.png';
 
 const Item = props => (
     <tr>

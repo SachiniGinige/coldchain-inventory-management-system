@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
+import generatePDF from "./itemReportGenerator";
+
 import Table from 'react-bootstrap/Table';
 import editIcon from './img/edit.png';
 import deleteIcon from './img/delete.png';
+import downloadIcon from './img/download.png';
 // import filterIcon from './img/filterIcon.png';
 
 const Item = props => (
@@ -136,7 +139,7 @@ export default class ItemList extends Component {
                     <div className="row">
                         <div className="col-md-auto searchbarCol">
                             <div className="filterDiv">
-                                <label className="form-label filter-label" htmlFor="filter1" >LOCATION 
+                                <label className="form-label filter-label" htmlFor="filter1" >LOCATION
                                     {/* <img src={filterIcon} className="filterIcon" alt=""/> */}
                                 </label>
                                 <select className="filter-select" id="filter1" value={this.state.location} onChange={this.onChangeLocation}>
@@ -179,7 +182,7 @@ export default class ItemList extends Component {
                 <div className="table-responsive">
                     {/* table of all equipment items */}
                     <Table className="table table-sm table-striped table-bordered table-hover">
-                        <thead style={{textAlign: "center"}}>
+                        <thead style={{ textAlign: "center" }}>
                             <tr>
                                 <th>Item ID</th>
                                 <th>Procured Date</th>
@@ -201,9 +204,21 @@ export default class ItemList extends Component {
                     </Table>
                 </div>
                 <br /><br />
-                <span className="btnContainer"><a className="btn btn-outline-primary" href="./eqitem-add"> Add Item </a></span>
-                <span className="btnContainer"><a className="btn btn-outline-primary" href="./eqtype"> Equipment Types </a></span>
-                <span className="btnContainer"><a className="btn btn-outline-primary" href="./model"> Equipment Models </a></span>
+                <div className="container">
+                    <div classname="row">
+                        {/* <div classname="col-md-4"> */}
+                            <a className="btn btn-primary btnContainer" href="./eqitem-add"> Add Item </a>
+                            <a className="btn btn-outline-info btnContainer" href="./eqtype"> Equipment Types </a>
+                            <a className="btn btn-outline-info btnContainer" href="./model"> Equipment Models </a>
+                        {/* </div> */}
+                        {/* <div classname="col-md-4 ml-auto"> */}
+                            <button className="btn btn-warning" onClick={() => generatePDF(this.state.items)} style={{color:"white"}}>
+                                Generate Report
+                                <img src={downloadIcon} style={{ height: 20, marginLeft: 8, marginBottom:3}} alt=""/>
+                            </button>
+                        {/* </div> */}
+                    </div>
+                </div>
             </div>
         );
     }

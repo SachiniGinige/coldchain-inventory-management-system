@@ -657,15 +657,18 @@ app.put("/locations/update/:id", (req, res)=>{
 
     const name = req.body.name;
     const level = req.body.level;
+    const addrBuilding = req.body.addrBuilding;
+    const addrStreet = req.body.addrStreet;
+    const addrCity = req.body.addrCity;
     const address = req.body.address;
     const contactPerson = req.body.contactPerson;
     const contactNo1= req.body.contactNo1;
     const contactNo2= req.body.contactNo2;
     const status= req.body.status;
 
-    const sqlUpdate = "UPDATE location SET name=?,level=?,address=?,contactPerson=?, contactNo1=?, contactNo2=?, status=? WHERE locationId = ?;";
+    const sqlUpdate = "UPDATE location SET name=?,level=?,address=?,buildingName=?,street=?,city=?,contactPerson=?, contactNo1=?, contactNo2=?, status=? WHERE locationId = ?;";
 
-    db.query(sqlUpdate, [name, level, address, contactPerson, contactNo1, contactNo2, status, id],(err, result)=>{
+    db.query(sqlUpdate, [name, level, address,addrBuilding,addrStreet, addrCity, contactPerson, contactNo1, contactNo2, status, id],(err, result)=>{
         if(!err){
             console.log(result)
             if(result.affectedRows>=1){

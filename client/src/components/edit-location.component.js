@@ -44,9 +44,9 @@ export default class EditLocation extends Component {
                 this.setState({
                     name: response.data.name,
                     level: response.data.level,
-                    addrBuilding: response.data.addrBuilding,
-                    addrStreet: response.data.addrStreet,
-                    addrCity: response.data.addrCity,
+                    addrBuilding: response.data.buildingName,
+                    addrStreet: response.data.street,
+                    addrCity: response.data.city,
                     contactPerson: response.data.contactPerson,
                     contactNo1: response.data.contactNo1,
                     contactNo2: response.data.contactNo2,

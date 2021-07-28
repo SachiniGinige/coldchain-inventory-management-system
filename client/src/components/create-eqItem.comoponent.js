@@ -20,7 +20,7 @@ export default class AddItem extends Component{
 
         this.state = {
             dateProcured: '',
-            productionYear: null,
+            productionYear: '',
             shelfLife: '',
             manufacturer: '',
             functionalStatus: '',
@@ -32,7 +32,11 @@ export default class AddItem extends Component{
             locations: [],
             supplyAgent: null,
             maintenanceAgent: null,
-            agents: []        
+            agents: [],  
+
+            dateErr:'', 
+            prodYrErr:'',
+            shelfLifeErr:'',
         }
     }
 
@@ -80,16 +84,19 @@ export default class AddItem extends Component{
         this.setState({
             dateProcured: e.target.value
         });
+        this.validateDate(e.target.value);
     }
     onChangeProductionYear(e){
         this.setState({
             productionYear: e.target.value
         });
+        this.validateProdYr(e.target.value);
     }
     onChangeShelfLife(e){
         this.setState({
             shelfLife: e.target.value
         });
+        this.validateShelfLife(e.target.value);
     }
     onChangeManufacturer(e){
         this.setState({
@@ -146,29 +153,99 @@ export default class AddItem extends Component{
         });
     }
 
+    validateDate(val){
+        if(!val){
+            this.setState({
+                dateErr: '*Required field'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                dateErr: ''
+            });
+            return true;
+        }
+    }
+    validateProdYr(val){
+        if(!val){
+            this.setState({
+                prodYrErr: '*Required field'
+            });
+            return false;
+        }
+        if(!val.match(/^[1-2][0-9]{3}$/)){
+            this.setState({
+                prodYrErr: '*Enter a valid year'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                prodYrErr: ''
+            });
+            return true;
+        }
+    }
+    validateShelfLife(val){
+        if(!val){
+            this.setState({
+                shelfLifeErr: '*Required field'
+            });
+            return false;
+        }
+        if(!val.match(/^[0-9]{1,2}$/)){
+            this.setState({
+                shelfLifeErr: '*Enter a valid number of yrs'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                shelfLifeErr: ''
+            });
+            return true;
+        }
+    }
+
+    validateForm(){
+        this.validateDate(this.state.dateProcured);
+        this.validateProdYr(this.state.productionYear);
+        this.validateShelfLife(this.state.shelfLife);
+        if((this.validateDate(this.state.dateProcured)&&this.validateProdYr(this.state.productionYear)&&this.validateShelfLife(this.state.shelfLife))===false){
+            alert('Please check form input');
+            return false;
+        } 
+        return true;
+    }
+
     onSubmit(e){
         e.preventDefault();
 
-        const eqitem = {
-            dateProcured:  this.state.dateProcured,
-            productionYear: this.state.productionYear,
-            shelfLife:  this.state.shelfLife,
-            manufacturer:  this.state.manufacturer,
-            functionalStatus:  this.state.functionalStatus,
-            eqtype:  this.state.eqtype,
-            model:  this.state.model,
-            location:  this.state.location,
-            supplyAgent: this.state.supplyAgent,
-            maintenanceAgent: this.state.maintenanceAgent
+        const isValid = this.validateForm();
+
+        if(isValid){
+            const eqitem = {
+                dateProcured:  this.state.dateProcured,
+                productionYear: this.state.productionYear,
+                shelfLife:  this.state.shelfLife,
+                manufacturer:  this.state.manufacturer,
+                functionalStatus:  this.state.functionalStatus,
+                eqtype:  this.state.eqtype,
+                model:  this.state.model,
+                location:  this.state.location,
+                supplyAgent: this.state.supplyAgent,
+                maintenanceAgent: this.state.maintenanceAgent
+            }
+
+            console.log(eqitem);
+
+            axios.post('http://localhost:3001/eqitems/add', eqitem)
+                .then(res => console.log(res.data));
+            
+            alert("Item added");        
+            window.location = './equipment';    
         }
-
-        console.log(eqitem);
-
-        axios.post('http://localhost:3001/eqitems/add', eqitem)
-            .then(res => console.log(res.data));
-        
-        alert("Item added");        
-        window.location = './equipment';    
     }
 
     render() {
@@ -179,13 +256,13 @@ export default class AddItem extends Component{
                 
                 <label className="form-label">Procured Date: </label>
                 <input type="date" className="form-control" value={this.state.dateProcured} onChange={this.onChangeDateProcured} required/>
-                <br/>
+                <div class="formError">{this.state.dateErr}</div><br/>
                 <label className="form-label">Production Year: </label>
                 <input type="text" className="form-control"  value={this.state.productionYear} onChange={this.onChangeProductionYear} />
-                <br/>
+                <div class="formError">{this.state.prodYrErr}</div><br/>
                 <label className="form-label">Shelf life (Years): </label>
                 <input type="text" className="form-control" value={this.state.shelfLife} onChange={this.onChangeShelfLife} />
-                <br/>
+                <div class="formError">{this.state.shelfLifeErr}</div><br/>
                 <label className="form-label">Manufacturer: </label>
                 <input type="text" className="form-control" value={this.state.manufacturer} onChange={this.onChangeManufacturer} />
                 <br/>

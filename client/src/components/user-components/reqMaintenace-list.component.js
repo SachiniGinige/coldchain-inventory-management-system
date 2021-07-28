@@ -7,7 +7,7 @@ const Request = props => (
     <tr>
         <td>{props.request.requestId}</td>
         <td>{new Date(props.request.date).toLocaleString('en',{ timeZone: 'Asia/Colombo' })}</td>
-        <td>{props.request.status}</td>
+        {/* <td>{props.request.status}</td> */}
         <td>{props.request.description}</td>
         <td>{props.request.itemId}</td>
         <td>{props.request.sender}</td>
@@ -84,7 +84,7 @@ export default class MaintenaceRequestListUser extends Component{
                             <tr>
                                 <th>Request ID</th>
                                 <th>Sent Date/Time</th>
-                                <th>Status</th>
+                                {/* <th>Status</th> */}
                                 <th>Description</th>
                                 <th>Item ID</th>
                                 <th>Sender</th>

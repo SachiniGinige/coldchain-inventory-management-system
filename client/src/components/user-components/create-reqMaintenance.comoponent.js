@@ -5,7 +5,7 @@ export default class AddMaintenaceRequest extends Component{
     constructor(props){
         super(props);
 
-        this.onChangeStatus=this.onChangeStatus.bind(this);
+        // this.onChangeStatus=this.onChangeStatus.bind(this);
         this.onChangeDescription=this.onChangeDescription.bind(this);
         this.onChangeItem=this.onChangeItem.bind(this);
         this.onChangeReceiver=this.onChangeReceiver.bind(this);
@@ -74,12 +74,12 @@ export default class AddMaintenaceRequest extends Component{
         })
             
     }
-    onChangeStatus(e){
-        this.setState({
-            status: e.target.value
-        });
-        this.validateStatus(e.target.value);
-    }
+    // onChangeStatus(e){
+    //     this.setState({
+    //         status: e.target.value
+    //     });
+    //     this.validateStatus(e.target.value);
+    // }
     onChangeDescription(e){
         this.setState({
             description: e.target.value
@@ -118,20 +118,20 @@ export default class AddMaintenaceRequest extends Component{
             return true;
         }
     }
-    validateStatus(val){
-        if(!val){
-            this.setState({
-                statusErr: '*Required field'
-            });
-            return false;
-        }
-        else{
-            this.setState({
-                statusErr: ''
-            });
-            return true;
-        }
-    }
+    // validateStatus(val){
+    //     if(!val){
+    //         this.setState({
+    //             statusErr: '*Required field'
+    //         });
+    //         return false;
+    //     }
+    //     else{
+    //         this.setState({
+    //             statusErr: ''
+    //         });
+    //         return true;
+    //     }
+    // }
     validateDescription(val){
         if(!val){
             this.setState({
@@ -165,10 +165,10 @@ export default class AddMaintenaceRequest extends Component{
     validateForm(){
 
         this.validateItem(this.state.itemId);
-        this.validateStatus(this.state.status);
+        // this.validateStatus(this.state.status);
         this.validateDescription(this.state.description);
         this.validateReceiver(this.state.receiver);
-        if((this.validateItem(this.state.itemId)&&this.validateStatus(this.state.status)&&this.validateDescription(this.state.description)
+        if((this.validateItem(this.state.itemId)&&this.validateDescription(this.state.description)
                     &&this.validateReceiver(this.state.receiver))===false){
             alert('Please check form input');
             return false;
@@ -201,7 +201,7 @@ export default class AddMaintenaceRequest extends Component{
             // clear form  
             this.setState({
                 itemId: '',
-                status: '',
+                // status: '',
                 description: '',
                 receiver: '',
                 searchTerm: ''
@@ -219,7 +219,7 @@ export default class AddMaintenaceRequest extends Component{
                 <label className="form-label">Item ID: </label>
                 <input type="text" className="form-control" required value={this.state.itemId} onChange={this.onChangeItem} />
                 <div class="formError">{this.state.itemErr}</div><br/>
-                <label className="form-label"> Selected Item Details (Will be filled autimatically...)</label>
+                <label className="form-label"> Selected Item Details (Will be filled automatically...)</label>
                 <div className="row formRow">
                     <div className="col">
                         <label className="form-label">Equipment ID: </label>
@@ -235,9 +235,9 @@ export default class AddMaintenaceRequest extends Component{
                     </div>
                 </div>
 
-                <label className="form-label">Status: </label>
+                {/* <label className="form-label">Status: </label>
                 <input type="text" className="form-control" value={this.state.status} onChange={this.onChangeStatus}/>
-                {this.state.statusErr ? (<div class="formError">{this.state.statusErr}</div>) : null} <br/>
+                {this.state.statusErr ? (<div class="formError">{this.state.statusErr}</div>) : null} <br/> */}
                                 
                 <label className="form-label">Description: </label>
                 <textarea className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
@@ -274,7 +274,8 @@ export default class AddMaintenaceRequest extends Component{
                 <label className="form-label">FROM (Sender ID): </label>
                 <input type="text" className="form-control" disabled value={sessionStorage.getItem(sessionStorage.getItem("username"))}  />
 
-                <div class="formError">{this.state.errorMsg}</div><br/><br/>
+                {/* <div class="formError">{this.state.errorMsg}</div> */}
+                <br/><br/>
 
                 <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>Send Maintenance Request</button>
                 <br/><br/><br/>                

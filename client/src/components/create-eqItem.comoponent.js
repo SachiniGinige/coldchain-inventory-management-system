@@ -183,7 +183,7 @@ export default class AddItem extends Component{
                 <label className="form-label">Production Year: </label>
                 <input type="text" className="form-control"  value={this.state.productionYear} onChange={this.onChangeProductionYear} />
                 <br/>
-                <label className="form-label">Shelf life: </label>
+                <label className="form-label">Shelf life (Years): </label>
                 <input type="text" className="form-control" value={this.state.shelfLife} onChange={this.onChangeShelfLife} />
                 <br/>
                 <label className="form-label">Manufacturer: </label>

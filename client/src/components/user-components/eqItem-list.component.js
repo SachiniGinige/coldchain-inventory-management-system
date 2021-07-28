@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 
+import generatePDF from "../itemReportGenerator";
+
 import Table from 'react-bootstrap/Table';
 import editIcon from '../img/edit.png';
+import downloadIcon from '../img/download.png';
 
 var uname=sessionStorage.getItem('username');
 var id=sessionStorage.getItem(uname);
@@ -192,7 +195,10 @@ export default class ItemListUser extends Component{
                 
                 <span className="btnContainer"><a className="btn btn-outline-primary" href="./eqtype"> Equipment Types </a></span>
                 <span className="btnContainer"><a className="btn btn-outline-primary" href="./model"> Equipment Models </a></span>
-                
+                <button className="btn btn-warning" onClick={() => generatePDF(this.state.items)} style={{color:"white"}}>
+                    Generate Report
+                    <img src={downloadIcon} style={{ height: 20, marginLeft: 8, marginBottom:3}} alt=""/>
+                </button>
             </div>
         );
     }

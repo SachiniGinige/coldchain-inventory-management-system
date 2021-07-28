@@ -22,7 +22,14 @@ export default class EditUser extends Component{
             username: '',
             password: '',
             location: '',
-            locations: []
+            locations: [],
+
+            nameErr: '',
+            designationErr: '',
+            emailErr: '',
+            contactNoErr: '',
+            usernameErr: '',
+            passwordErr: '',
         }
     }
 
@@ -64,31 +71,37 @@ export default class EditUser extends Component{
         this.setState({
             name: e.target.value
         });
+        this.validateName(e.target.value);
     }
     onChangeDesignation(e){
         this.setState({
             designation: e.target.value
         });
+        this.validateDesignation(e.target.value);
     }
     onChangeEmail(e){
         this.setState({
             email: e.target.value
         });
+        this.validateEmail(e.target.value);
     }
     onChangeContactNo(e){
         this.setState({
             contactNo: e.target.value
         });
+        this.validateContactNo(e.target.value);
     }
     onChangeUsername(e){
         this.setState({
             username: e.target.value
         });
+        this.validateUsername(e.target.value);
     }
     onChangePassword(e){
         this.setState({
             password: e.target.value
         });
+        this.validatePassword(e.target.value);
     }
     onChangeLocation(e){
         this.setState({
@@ -96,27 +109,177 @@ export default class EditUser extends Component{
         });
     }
 
+    validateName(val){
+        if(!val){
+            this.setState({
+                nameErr: '*Required field'
+            });
+            return false;
+        }
+        else if(!val.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/)){
+            this.setState({
+                nameErr: '*Invalid format for Name'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                nameErr: ''
+            });
+            return true;
+        }
+    }
+    
+    validateDesignation(val){
+        if(!val){
+            this.setState({
+                designationErr: '*Required field'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                designationErr: ''
+            });
+            return true;
+        }
+    }
+
+    validateEmail(val){
+        if(!val){
+            this.setState({
+                emailErr: '*Required field'
+            });
+            return false;
+        }
+        else if(!val.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+            this.setState({
+                emailErr: '*Enter a valid email address'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                emailErr: ''
+            });
+            return true;
+        }
+    }
+    validateContactNo(val){
+        if(!val){
+            this.setState({
+                contactNoErr: '*Required field'
+            });
+            return false;
+        }
+        else if(!((val.match(/^[0-9]{10}$/))||(val.match(/^\+[0-9]{11}$/)))){
+            this.setState({
+                contactNoErr: '*Enter a valid telephone number. Must contain 10 digits'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                contactNoErr: ''
+            });
+            return true;
+        }
+    }
+    validateUsername(val){
+        if(!val){
+            this.setState({
+                usernameErr: '*Required field'
+            });
+            return false;
+        }
+        else if((!val.match(/^[a-zA-Z0-9]{4,}$/))){
+            this.setState({
+                usernameErr: '*Must contain at least 4 characters'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                usernameErr: ''
+            });
+            return true;
+        }
+    }
+    validatePassword(val){
+        if(!val){
+            this.setState({
+                passwordErr: '*Required field'
+            });
+            return false;
+        }
+        else if((!val.match(/^.{6,}$/))){
+            this.setState({
+                passwordErr: '*Must contain at least 6 characters'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                passwordErr: ''
+            });
+            return true;
+        }
+    }
+
+
+
+    validateForm(){
+        // if(((this.state.nameErr)||(this.state.designationErr)||(this.state.emailErr)||(this.state.contactNoErr)||
+        // (this.state.nameErr)||(this.state.usernameErr)||(this.state.passwordErr))||((!this.state.name))){
+        //     console.log("Please check form input");
+        //     return false;
+        // }
+
+        this.validateName(this.state.name);
+        this.validateDesignation(this.state.designation);
+        this.validateEmail(this.state.email);
+        this.validateContactNo(this.state.contactNo);
+        this.validateUsername(this.state.username);
+        this.validatePassword(this.state.password);
+        if((this.validateName(this.state.name)&&this.validateDesignation(this.state.designation)&&this.validateEmail(this.state.email)&&this.validateContactNo(this.state.contactNo)
+                    &&this.validateUsername(this.state.username)&&this.validatePassword(this.state.password))===false){
+            // this.setState({
+            //     errorMsg: 'Please check form input'
+            // });
+            alert('Please check form input');
+            return false;
+        } 
+        // this.setState({
+        //     errorMsg: ''
+        // });
+        return true;
+    }
+
     onSubmit(e){
         e.preventDefault();
-        
-        const user = {
-            name:  this.state.name,
-            designation: this.state.designation,
-            email:  this.state.email,
-            contactNo:  this.state.contactNo,
-            username:  this.state.username,
-            password:  this.state.password,
-            location:  this.state.location
-        }
 
-        console.log(user);
+        const isValid = this.validateForm();
 
-        axios.put(`http://localhost:3001/users/update/${this.props.match.params.id}`, user)
-            .then(res => console.log(res.data));
+        if(isValid){
         
-        alert("User edited");        
-        window.location = '../users';
-        
+            const user = {
+                name:  this.state.name,
+                designation: this.state.designation,
+                email:  this.state.email,
+                contactNo:  this.state.contactNo,
+                username:  this.state.username,
+                password:  this.state.password,
+                location:  this.state.location
+            }
+
+            console.log(user);
+
+            axios.put(`http://localhost:3001/users/update/${this.props.match.params.id}`, user)
+                .then(res => console.log(res.data));
+            
+            alert("User edited");        
+            window.location = '../users';
+        }    
     }
 
     render() {
@@ -127,7 +290,7 @@ export default class EditUser extends Component{
                 
                 <label className="form-label">Name: </label>
                 <input type="text" className="form-control" value={this.state.name} onChange={this.onChangeName} />
-                <br/>
+                <div class="formError">{this.state.nameErr}</div> <br/>
                 
                 <label className="form-label">Designation: </label>
                 <div className="form-check">
@@ -166,21 +329,21 @@ export default class EditUser extends Component{
                     <label className="form-check-label" for="designation3">
                         Medical Officer of Health
                     </label>
-                    <br/><br/>
+                    <div class="formError">{this.state.designationErr}</div> <br/><br/>
                 </div>
                 
                 <label className="form-label">Email: </label>
                 <input type="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail} />
-                <br/>
+                <div class="formError">{this.state.emailErr}</div> <br/>
                 <label className="form-label">Contact Number: </label>
                 <input type="text" className="form-control" value={this.state.contactNo} onChange={this.onChangeContactNo} />
-                <br/>
+                <div class="formError">{this.state.contactNoErr}</div> <br/>
                 <label className="form-label">Username: </label>
                 <input type="text" className="form-control" value={this.state.username} onChange={this.onChangeUsername} />
-                <br/>
+                <div class="formError">{this.state.usernameErr}</div> <br/>
                 <label className="form-label">Password: </label>
                 <input type="text" className="form-control" value={this.state.password} onChange={this.onChangePassword} />
-                <br/>
+                <div class="formError">{this.state.passwordErr}</div> <br/>
                 <label className="form-label">Location: </label>
                 <select className="form-control" value={this.state.location} onChange={this.onChangeLocation}>
                             {

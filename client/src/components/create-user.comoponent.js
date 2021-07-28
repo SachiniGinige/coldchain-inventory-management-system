@@ -95,7 +95,7 @@ export default class AddUser extends Component{
             });
             return false;
         }
-        else if(!val.match(/^[a-zA-Z]+$/)){
+        else if(!val.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/)){
             this.setState({
                 nameErr: '*Invalid format for Name'
             });
@@ -268,7 +268,7 @@ export default class AddUser extends Component{
                 location: '',
                 locations: []
             }) 
-            // window.location = './users';
+            window.location = './users';
         } 
     }
 

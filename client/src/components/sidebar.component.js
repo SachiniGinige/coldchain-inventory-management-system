@@ -52,11 +52,11 @@ function Sidebar() {
                     <img src={reqIcon} className="sidebaricon" alt=""/> Requests
                 </NavLink>
             </div>
-            <div className="sidebarlinkcont">       
+            {/* <div className="sidebarlinkcont">       
                 <NavLink to="./forecasts">
                     <img src={forecastIcon} className="sidebaricon" alt=""/> Forecast
                 </NavLink>
-            </div>
+            </div> */}
         </div>
     );
 }

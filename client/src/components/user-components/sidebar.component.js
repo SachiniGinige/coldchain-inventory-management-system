@@ -47,7 +47,7 @@ function SidebarUser() {
                     <img src={agentsIcon} className="sidebaricon" alt=""/> Agents
                 </NavLink>
             </div>
-            <div class="sidebarlinkcont">       
+            {/* <div class="sidebarlinkcont">       
                 <NavLink to="./requests">
                     <img src={reqIcon} className="sidebaricon" alt=""/> Requests
                 </NavLink>
@@ -56,7 +56,7 @@ function SidebarUser() {
                 <NavLink to="./forecasts">
                     <img src={forecastIcon} className="sidebaricon" alt=""/> Forecast
                 </NavLink>
-            </div>
+            </div> */}
         </div>
     );
 }

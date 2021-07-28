@@ -85,8 +85,8 @@ export default class LocationListUser extends Component{
                                 <th>Location Name</th>
                                 <th>Address</th>
                                 <th>Contact Person</th>
-                                <th>Contact No. 1</th>
-                                <th>Contact No. 2</th>
+                                <th>Contact No.</th>
+                                <th>Additional Contact No. 2</th>
                                 <th>Status</th>
                             </tr>
                         </thead>

@@ -18,7 +18,7 @@ const Item = props => (
         <td>{props.item.dateProcured.substring(0,10)}</td>
         <td>{props.item.productionYear}</td>
         <td>{props.item.shelfLife}</td>
-        <td>{props.item.maufacturer}</td>
+        {/* <td>{props.item.maufacturer}</td> */}
         <td>{props.item.currentFunctionalStatus}</td>
         <td>{props.item.equipment}</td>
         <td>{props.item.model}</td>
@@ -176,7 +176,7 @@ export default class ItemListUser extends Component{
                                 <th>Procured Date</th>
                                 <th>Production Year</th>
                                 <th>Shelf Life</th>
-                                <th>Manufacturer</th>
+                                {/* <th>Manufacturer</th> */}
                                 <th>Current Functional Status</th>
                                 <th>Equipment Type</th>
                                 <th>Model</th>

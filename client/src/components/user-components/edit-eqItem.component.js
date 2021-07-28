@@ -31,7 +31,11 @@ export default class EditItemUser extends Component{
             locations: [],
             supplyAgent: null,
             maintenanceAgent: null,
-            agents: []
+            agents: [], 
+
+            dateErr:'',
+            prodYrErr:'',
+            shelfLifeErr:''
         }
     }
 
@@ -44,7 +48,7 @@ export default class EditItemUser extends Component{
            
                 this.setState({
                     dateProcured: response.data.dateProcured.substring(0,10),
-                    productionYear: response.data.productionYear,
+                    productionYear: String(response.data.productionYear),
                     shelfLife: response.data.shelfLife,
                     manufacturer: response.data.manufacturer,
                     functionalStatus: response.data.currentFunctionalStatus,
@@ -97,16 +101,19 @@ export default class EditItemUser extends Component{
         this.setState({
             dateProcured: e.target.value
         });
+        this.validateDate(e.target.value);
     }
     onChangeProductionYear(e){
         this.setState({
             productionYear: e.target.value
         });
+        this.validateProdYr(e.target.value);
     }
     onChangeShelfLife(e){
         this.setState({
             shelfLife: e.target.value
         });
+        this.validateShelfLife(e.target.value);
     }
     onChangeManufacturer(e){
         this.setState({
@@ -162,31 +169,99 @@ export default class EditItemUser extends Component{
             maintenanceAgent: e.target.value
         });
     }
+    validateDate(val){
+        if(!val){
+            this.setState({
+                dateErr: '*Required field'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                dateErr: ''
+            });
+            return true;
+        }
+    }
+    validateProdYr(val){
+        if(!val){
+            this.setState({
+                prodYrErr: '*Required field'
+            });
+            return false;
+        }
+        if(!val.match(/^[1-2][0-9]{3}$/)){
+            this.setState({
+                prodYrErr: '*Enter a valid year'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                prodYrErr: ''
+            });
+            return true;
+        }
+    }
+    validateShelfLife(val){
+        if(!val){
+            this.setState({
+                shelfLifeErr: '*Required field'
+            });
+            return false;
+        }
+        if(!val.match(/^[0-9]{1,2}$/)){
+            this.setState({
+                shelfLifeErr: '*Enter a valid number of yrs'
+            });
+            return false;
+        }
+        else{
+            this.setState({
+                shelfLifeErr: ''
+            });
+            return true;
+        }
+    }
+
+    validateForm(){
+        this.validateDate(this.state.dateProcured);
+        this.validateProdYr(this.state.productionYear);
+        this.validateShelfLife(this.state.shelfLife);
+        if((this.validateDate(this.state.dateProcured)&&this.validateProdYr(this.state.productionYear)&&this.validateShelfLife(this.state.shelfLife))===false){
+            alert('Please check form input');
+            return false;
+        } 
+        return true;
+    }
 
     onSubmit(e){
         e.preventDefault();
         
-        const eqitem = {
-            dateProcured:  this.state.dateProcured,
-            productionYear: this.state.productionYear,
-            shelfLife:  this.state.shelfLife,
-            manufacturer:  this.state.manufacturer,
-            functionalStatus:  this.state.functionalStatus,
-            eqtype:  this.state.eqtype,
-            model:  this.state.model,
-            location:  this.state.location,
-            supplyAgent: this.state.supplyAgent,
-            maintenanceAgent: this.state.maintenanceAgent
+        const isValid = this.validateForm();
+
+        if(isValid){
+            const eqitem = {
+                dateProcured:  this.state.dateProcured,
+                productionYear: this.state.productionYear,
+                shelfLife:  this.state.shelfLife,
+                manufacturer:  this.state.manufacturer,
+                functionalStatus:  this.state.functionalStatus,
+                eqtype:  this.state.eqtype,
+                model:  this.state.model,
+                location:  this.state.location,
+                supplyAgent: this.state.supplyAgent,
+                maintenanceAgent: this.state.maintenanceAgent
+            }
+
+            console.log(eqitem);
+
+            axios.put(`http://localhost:3001/eqitems/update/${this.props.match.params.id}`, eqitem)
+                .then(res => console.log(res.data));
+            
+            // alert("Item edited");        
+            window.location = '../equipment';
         }
-
-        console.log(eqitem);
-
-        axios.put(`http://localhost:3001/eqitems/update/${this.props.match.params.id}`, eqitem)
-            .then(res => console.log(res.data));
-        
-        // alert("Item edited");        
-        window.location = '../equipment';
-        
     }
 
     render() {
@@ -197,13 +272,13 @@ export default class EditItemUser extends Component{
                 
                 <label className="form-label">Procured Date: </label>
                 <input type="date" className="form-control" value={this.state.dateProcured} onChange={this.onChangeDateProcured} />
-                <br/>
+                <div class="formError">{this.state.dateErr}</div><br/>
                 <label className="form-label">Production Year: </label>
                 <input type="text" className="form-control" value={this.state.productionYear} onChange={this.onChangeProductionYear} />
-                <br/>
+                <div class="formError">{this.state.prodYrErr}</div><br/>
                 <label className="form-label">Shelf life: </label>
                 <input type="text" className="form-control" value={this.state.shelfLife} onChange={this.onChangeShelfLife} />
-                <br/>
+                <div class="formError">{this.state.shelfLifeErr}</div><br/>
                 <label className="form-label">Manufacturer: </label>
                 <input type="text" className="form-control" value={this.state.manufacturer} onChange={this.onChangeManufacturer} />
                 <br/>

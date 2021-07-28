@@ -314,6 +314,28 @@ app.get("/eqitems/get-table", (req, res) => {
     })
 });
 
+app.get("/eqitems/get-district/:id", (req, res) => {
+    const id= req.params.id;
+
+    const sqlSelect = "SELECT i.itemId, i.dateProcured, i.productionYear, i.shelfLife, i.manufacturer, i.currentFunctionalStatus, t.name as equipment," 
+                    +"m.name as model, l.name as location, sa.name as supplyAgent, ma.name as maintenanceAgent FROM coldchain_db.equipment_item AS i " 
+                    +"LEFT JOIN coldchain_db.equipment_type AS t ON (i.equipmentId = t.equipmentId)"
+                    +"LEFT JOIN coldchain_db.location AS l ON (i.locationId = l.locationId)" 
+                    +"LEFT JOIN coldchain_db.agent AS sa ON (i.supplyAgentId = sa.agentId)" 
+                    +"LEFT JOIN coldchain_db.agent AS ma ON (i.maintenanceAgentId = ma.agentId)" 
+                    +"LEFT JOIN coldchain_db.model AS m ON (i.modelId = m.modelId)" 
+                    +"where l.locationId in (select locationId from coldchain_db.divisional_location" 
+                    +" where district=(Select locationId from coldchain_db.user where userId=?));";
+    
+    db.query(sqlSelect, id, (err,result)=>{
+           if(!err) {
+                res.json(result);}
+            else{
+                res.json(err);                
+            }        
+    })
+});
+
 app.get("/eqitems/getbyuser-table/:id", (req, res) => {
     const id= req.params.id;
 

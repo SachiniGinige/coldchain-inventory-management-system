@@ -24,6 +24,8 @@ import EditAgent from "./components/edit-agent.component";
 import AdminLoginPage from "./components/adminLoginPage.component";
 import UserLoginPage from "./components/userLoginPage.component";
 import ItemListUser from "./components/user-components/eqItem-list.component";
+import DistrictItemListUser from "./components/user-components/eqItem-listRE.component";
+import NationalItemListUser from "./components/user-components/eqItem-listEPID.component";
 import EditItemUser from "./components/user-components/edit-eqItem.component";
 import SidebarUser from "./components/user-components/sidebar.component";
 import EqTypeListUser from "./components/user-components/eqType-list.component";
@@ -82,6 +84,8 @@ function App() {
           
 
           <Route path="/user/equipment" exact component={ItemListUser}/>
+          <Route path="/user/equipment-district" exact component={DistrictItemListUser}/>
+          <Route path="/user/equipment-national" exact component={NationalItemListUser}/>
           <Route path="/user/eqitem-edit/:id" exact component={EditItemUser}/>
           <Route path="/user/eqtype" exact component={EqTypeListUser}/>
           <Route path="/user/model" exact component={ModelListUser}/>

@@ -31,7 +31,7 @@ const Item = props => (
     </tr>
 )
 
-export default class ItemListUser extends Component{
+export default class DistrictItemListUser extends Component{
     
     constructor(props){
         super(props);
@@ -51,7 +51,7 @@ export default class ItemListUser extends Component{
 
     componentDidMount(){
         
-        axios.get(`http://localhost:3001/eqitems/getbyuser-table/${id}`)
+        axios.get(`http://localhost:3001/eqitems/get-district/${id}`)
             .then(response => {
                 this.setState({
                     items: response.data
@@ -60,25 +60,12 @@ export default class ItemListUser extends Component{
             .catch((error) =>{
                 console.log(error);
             })
-        // axios.get('http://localhost:3001/locations/get/')
-        //     .then(response => {
-        //         if (response.data.length > 0){
-        //             this.setState({
-        //                 locations: response.data.map(location=> location),
-        //             })
-        //         }
-        //     })
     }
     onChangeSearchTerm(e){
         this.setState({
             searchTerm: e.target.value
         });
     }
-    // onChangeLocation(e){
-    //     this.setState({
-    //         location: e.target.value
-    //     });
-    // }
     onChangeFunctionalStatus(e){
         this.setState({
             status: e.target.value
@@ -192,20 +179,11 @@ export default class ItemListUser extends Component{
                     </Table>
                 </div>
                 <br/><br/>
-                
-                <span className="btnContainer"><a className="btn btn-outline-primary" href="./eqtype"> Equipment Types </a></span>
-                <span className="btnContainer"><a className="btn btn-outline-primary" href="./model"> Equipment Models </a></span>
+
                 <button className="btn btn-warning" onClick={() => generatePDF(this.state.items)} style={{color:"white"}}>
                     Generate Report
                     <img src={downloadIcon} style={{ height: 20, marginLeft: 8, marginBottom:3}} alt=""/>
                 </button>
-                <br/><br/>
-                {sessionStorage.getItem("designation")==="RE" ? 
-                        (<span className="btnContainer"><a className="btn btn-outline-success" href="./equipment-district">District Overview </a></span>)
-                        : null}
-                {sessionStorage.getItem("designation")==="Epidemiologist" ? 
-                        (<span className="btnContainer"><a className="btn btn-outline-success" href="./equipment-national">National Overview </a></span>)
-                        : null}
             </div>
         );
     }

@@ -122,7 +122,7 @@ export default class LocationList extends Component{
                     </Table>
                 </div>
                 <br/><br/><br/>
-                <a className="btn btn-outline-primary" href="./location-add"> Add Location</a>
+                <a className="btn btn-primary" href="./location-add"> Add Location</a>
             </div>
         );
     }

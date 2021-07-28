@@ -146,7 +146,7 @@ export default class UserList extends Component{
                     </Table>
                 </div>
                 <br/><br/><br/>
-                <a className="btn btn-outline-primary" href="./user-add"> Add User</a>
+                <a className="btn btn-primary" href="./user-add"> Add User</a>
             </div>
         );
     }

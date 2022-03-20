@@ -43,7 +43,6 @@ import MaintenaceRecordList from "./components/maintenanceRecord-list.component"
 import EditMaintenaceRecord from "./components/edit-maintenanceRecord.comoponent";
 import MaintenaceRecordListUser from "./components/user-components/maintenanceRecord-list.component";
 import Report from "./components/Report.component";
-// import Example from "./components/modal.component";
 
 function App() {
   return (
